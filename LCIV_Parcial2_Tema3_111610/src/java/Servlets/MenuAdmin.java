@@ -1,11 +1,9 @@
-
 package Servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +12,8 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Angel
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
-
+public class MenuAdmin extends HttpServlet {
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -28,12 +25,14 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().setAttribute("titulo", "Login");
-        if (request.getSession().getAttribute("usr") == null) {
-            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+        if (request.getSession().getAttribute("usr") != null) {
+            request.setAttribute("titulo", "Menú del Admin");
+            RequestDispatcher rd = request.getRequestDispatcher("/menuAdmin.jsp");
             rd.forward(request, response);
         } else {
-            response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
+            request.setAttribute("mensajeError", "Error. Sesión no iniciada");
+            RequestDispatcher rd = request.getRequestDispatcher("/Login");
+            rd.forward(request, response);
         }
     }
 
@@ -48,22 +47,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String usuario = request.getParameter("txtUsuario");
-        String password = request.getParameter("txtPassword");
-
-        if (usuario.equals("admiral") && password.equals("akbar")) {
-            request.getSession().setAttribute("usr", usuario);
-            request.getSession().setMaxInactiveInterval(300);
-            request.getSession().setAttribute("titulo", "Menú Administrador");
-            response.sendRedirect(getServletContext().getContextPath() + "/menuAdmin.jsp");
-
-            //RequestDispatcher rd = request.getRequestDispatcher("/menuAdmin.jsp");
-            //rd.forward(request, response);
-        } else {
-            request.setAttribute("mensajeError", "Usuario o Contraseña incorrecto");
-            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
-        }
+        
     }
 
     /**

@@ -55,12 +55,13 @@ public class GestorBD {
 
         try {
             abrirConexion();            
-            String sql = "INSERT INTO Cursos(nombre, descripcion, costo, imagenURL) values(?,?,?,?)";
+            String sql = "INSERT INTO Cursos(nombre, descripcion, costo, imagenURL, activo) values(?,?,?,?,?)";
             PreparedStatement st = conn.prepareStatement(sql);
             st.setString(1, nuevo.getNombre());
             st.setString(2, nuevo.getDescripcion());
-            st.setDouble(3, nuevo.getCosto());
+            st.setFloat(3, nuevo.getCosto());
             st.setString(4, nuevo.getImagenUrl());
+            st.setBoolean(5, nuevo.isActivo());
 
             st.executeUpdate();
             st.close();

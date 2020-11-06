@@ -8,6 +8,7 @@
         <%@include file="header.jsp" %>
     </head>
     <body onload="saludo();">
+        <%@include file="menu.jsp" %>
         <div class="container" data-aos="fade-in">
             <div class="row justify-content-center text-center">
                 <div class="col col-lg-6">

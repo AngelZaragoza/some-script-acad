@@ -1,10 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
+import AccesoBaseDatos.GestorBD;
+import Modelo.Curso;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -54,7 +51,19 @@ public class ABMCurso extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        String nombre = request.getParameter("nombre");
+        String descripcion = request.getParameter("descripcion");
+        float costo = Float.parseFloat(request.getParameter("costo"));
+        boolean activo = false;
+        if (request.getParameter("activo") != null)
+            activo = true;
+        String imagenUrl = request.getParameter("imagenUrl");
+        
+        Curso nuevo = new Curso(0, nombre, descripcion, costo, imagenUrl, activo);
+        GestorBD gestor = new GestorBD();
+        gestor.agregarCurso(nuevo);
+        
+        response.sendRedirect(getServletContext().getContextPath() + "/MenuAdmin");
     }
 
     /**

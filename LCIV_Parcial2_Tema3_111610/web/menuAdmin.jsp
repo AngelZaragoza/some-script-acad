@@ -7,9 +7,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Bienvenido ${usr} </h1>
+        <%@include file="menu.jsp" %>
+        <br>
+        <h1>Bienvenido ${usr} ! </h1>
+        <hr>
+        <%@include file="includes/opcionesadmin.jsp" %>
         
         <a href="ABMCurso">Alta de Curso</a>
-        
+        <%@include file="footer.jsp" %>
     </body>
 </html>

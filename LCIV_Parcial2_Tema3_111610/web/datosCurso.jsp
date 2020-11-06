@@ -3,9 +3,10 @@
 <!DOCTYPE html>
 <html>
     <head>        
-        <%@include file="header.jsp" %>
+<%@include file="header.jsp" %>
     </head>
     <body>
+<%@include file="menu.jsp" %>
         <div class="container" data-aos="fade-in">
             <div class="row justify-content-center text-center">
                 <div class="col col-lg-6">
@@ -17,7 +18,7 @@
         <div class="container" data-aos="fade-up">
             <div class="row justify-content-center">
                 <div class="col col-lg-6">
-                    <form id="cursos" method="get">
+                    <form id="cursos" method="post" action="ABMCurso">
                         <div class="form-group">
                             <label for="curso" class="col-form-label">Nombre del Curso:</label>                
                             <input type="text" class="form-control" id="curso"
@@ -28,7 +29,7 @@
                         <div class="form-group">
                             <label for="descripcion" class="col-form-label">Descripción de contenidos:</label>
                             <textarea class="form-control" id="descripcion"
-                                      name="descripcion" rows="5" required
+                                      name="descripcion" rows="3" required                                      
                                       placeholder="Descripción"></textarea>                                   
                             <div class="validate"></div>
                         </div>
@@ -56,7 +57,7 @@
                                    name="imagenUrl"/>
                             <div class="validate"></div>
                         </div>
-                        <div class="form-group">
+                        <div class="form-group row">
                             <div class="col-sm-6">                            
                                 <input type="submit" class="btn btn-primary" value="Guardar">                            
                             </div>
@@ -65,7 +66,6 @@
                 </div>
             </div>
         </div>
-        <script src="aos/aos.js"></script>
-        <script>AOS.init();</script>
+<%@include file="footer.jsp" %>
     </body>
 </html>

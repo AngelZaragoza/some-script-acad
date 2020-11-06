@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
     <head>
-<!--        <title>LCIV - Academia</title>-->
         <%@include file="header.jsp" %>
-    </head>
+    </head>    
     <body>
+        <%@include file="menu.jsp" %>
         <h1>Bienvenido a la academia</h1>
         
         <h4>${usr}</h4>
