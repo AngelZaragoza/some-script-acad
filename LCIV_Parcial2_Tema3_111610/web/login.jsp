@@ -1,14 +1,14 @@
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
     <head>
         <!--<title>LCIV - Academia</title>-->
-        <%@include file="header.jsp" %>
+        <%@include file="includes/header.jsp" %>
     </head>
     <body onload="saludo();">
-        <%@include file="menu.jsp" %>
+        <%@include file="includes/menu.jsp" %>
         <div class="container" data-aos="fade-in">
             <div class="row justify-content-center text-center">
                 <div class="col col-lg-6">
@@ -46,15 +46,14 @@
                                    placeholder="Password"/>
                             <div class="validate"></div>
                         </div>                
-                        <div>                            
-                            <input type="submit" value="Verificar">
-                            <button type="submit">Send Message</button>
+                        <div class="col-sm-6">                            
+                            <input type="submit" class="btn btn-primary btn-block" value="Verificar">                            
                         </div>
                     </form>
                 </div>
             </div>
         </div>
                 
-        <%@include file="footer.jsp" %>
+        <%@include file="includes/footer.jsp" %>
     </body>
 </html>

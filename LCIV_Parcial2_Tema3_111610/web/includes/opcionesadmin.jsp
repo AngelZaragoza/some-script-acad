@@ -1,19 +1,84 @@
-<ul class="nav flex-column">
-  <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#"
-       role="button" aria-haspopup="true" aria-expanded="false">Cursos</a>
-    <div class="dropdown-menu">
-      <a class="dropdown-item" href="ABMCurso">Alta de Curso</a>
-      <a class="dropdown-item" href="#">Listado de Cursos</a>
-      <a class="dropdown-item" href="#">Something else here</a>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Separated link</a>
+<div class="container" data-aos="fade-up">
+    <div class="row justify-content-center">
+        <div class="col-sm-3">
+            <div class="card">
+                <h2 class="card-header text-center bg-info text-white">Cursos</h2>
+                <div class="card-body">                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="ABMCurso">Alta de Curso</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="ListadoCursos">Listado de Cursos</a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <h2 class="card-header text-center bg-info text-white">Alumnos</h2>
+                <div class="card-body">                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="#">Alta de Alumno</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="#">Listado de Alumnos</a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="card">
+                <h2 class="card-header text-center bg-info text-white">Inscripciones</h2>
+                <div class="card-body">                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="#">Inscribir Alumno</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="#">A completar...</a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
     </div>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Alumnos</a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="#">Programas</a>
-  </li>
-  
-</ul>
+    <br>
+    <hr>
+    <br>
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="card">
+                <h2 class="card-header text-center bg-info text-white">Carga de Programas</h2>
+                <div class="card-body">                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="ABMCurso">Subir un programa</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="#">--------</a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card">
+                <h2 class="card-header text-center bg-info text-white">A implementar</h2>
+                <div class="card-body">                    
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="#">*********</a>
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="#">##########</a>
+                        </li>                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,9 +1,11 @@
+
 package Servlets;
 
 import AccesoBaseDatos.GestorCursos;
 import Modelo.Curso;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,8 +17,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Angel
  */
-@WebServlet(name = "ABMCurso", urlPatterns = {"/ABMCurso"})
-public class ABMCurso extends HttpServlet {
+@WebServlet(name = "ListadoCursos", urlPatterns = {"/ListadoCursos"})
+public class ListadoCursos extends HttpServlet {
+
 
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -30,8 +33,12 @@ public class ABMCurso extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getSession().getAttribute("usr") != null) {
-            request.setAttribute("titulo", "Datos del Curso");
-            RequestDispatcher rd = request.getRequestDispatcher("/datosCurso.jsp");
+            GestorCursos gestor = new GestorCursos();
+            ArrayList<Curso> lista = gestor.listadoCursos();
+            
+            request.setAttribute("lista", lista);
+            request.setAttribute("titulo", "Listado de Cursos");
+            RequestDispatcher rd = request.getRequestDispatcher("/listaCursos.jsp");
             rd.forward(request, response);
         } else {
             request.setAttribute("mensajeError", "Error. Sesión no iniciada");
@@ -52,22 +59,6 @@ public class ABMCurso extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
-        //Codifica correctamente los caracteres enviados a la BD
-        request.setCharacterEncoding("UTF-8");
-        
-        String nombre = request.getParameter("nombre");
-        String descripcion = request.getParameter("descripcion");
-        float costo = Float.parseFloat(request.getParameter("costo"));
-        boolean activo = false;
-        if (request.getParameter("activo") != null)
-            activo = true;
-        String imagenUrl = request.getParameter("imagenUrl");
-        
-        Curso nuevo = new Curso(0, nombre, descripcion, costo, imagenUrl, activo);
-        GestorCursos gestor = new GestorCursos();
-        gestor.agregarCurso(nuevo);
-        
-        response.sendRedirect(getServletContext().getContextPath() + "/MenuAdmin");
     }
 
     /**

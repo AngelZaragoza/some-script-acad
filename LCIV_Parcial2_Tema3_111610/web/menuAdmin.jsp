@@ -1,19 +1,22 @@
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>
-        <%@include file="header.jsp" %>
+        <%@include file="includes/header.jsp" %>
         <title>JSP Page</title>
     </head>
     <body>
-        <%@include file="menu.jsp" %>
+        <%@include file="includes/menu.jsp" %>
         <br>
-        <h1>Bienvenido ${usr} ! </h1>
+        <div class="container" data-aos="fade-left">
+            <div class="row justify-content-center">
+                <h1>Bienvenido ${usr} ! </h1>
+            </div>
+        </div>
         <hr>
-        <%@include file="includes/opcionesadmin.jsp" %>
+        <%@include file="includes/opcionesadmin.jsp" %>        
         
-        <a href="ABMCurso">Alta de Curso</a>
-        <%@include file="footer.jsp" %>
+        <%@include file="includes/footer.jsp" %>
     </body>
 </html>

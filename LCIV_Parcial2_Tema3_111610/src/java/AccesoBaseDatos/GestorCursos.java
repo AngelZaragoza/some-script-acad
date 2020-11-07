@@ -7,18 +7,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 //import javax.swing.JOptionPane;
 
-public class GestorBD {
+public class GestorCursos {
 
     private String CONN = "jdbc:sqlserver://ANGEL-PC:50876;databaseName=LCIV_Academia_111610";
     private String USER = "sa";
     private String PASS = "tekken5";
     private Connection conn;
 
-    public GestorBD() {
+    public GestorCursos() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
         } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
@@ -30,7 +30,7 @@ public class GestorBD {
         }
         catch (Exception ex)
         {            
-            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -44,7 +44,7 @@ public class GestorBD {
         }
         catch (SQLException ex)
         {
-            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -67,50 +67,45 @@ public class GestorBD {
             st.close();
 
         } catch (Exception ex) {
-            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);            
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);            
         } finally {
             cerrarConexion();
         }        
 
     }
+    
+    public ArrayList<Curso> listadoCursos() {
+
+        ArrayList<Curso> lista = new ArrayList<>();
+        try {
+
+            abrirConexion();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM Cursos");
+
+            while (rs.next()) {
+                int idCurso = rs.getInt("idCurso");
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                float costo = rs.getFloat("costo");
+                boolean activo = rs.getBoolean("activo");
+                String imagenUrl = rs.getString("imagenUrl");
+
+                Curso cur = new Curso(idCurso, nombre, descripcion, costo, imagenUrl, activo);
+                lista.add(cur);
+            }
+
+            st.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cerrarConexion();
+        }
+        
+        return lista;
+        
+    }
 
 
-
-//    public ArrayList<Servicio> obtenerServicios() {
-//
-//        ArrayList<Servicio> lista = new ArrayList<>();
-//        try {
-//
-//            Connection conn = DriverManager.getConnection(CONN, USER, PASS);
-//
-//            Statement st = conn.createStatement();
-//            ResultSet rs = st.executeQuery("SELECT * FROM Servicios");
-//
-//            while (rs.next()) {
-//                int id = rs.getInt("id");
-//                String tipo = rs.getString("tipo");
-//                String descripcion = rs.getString("descripcion");
-//                double edad = rs.getDouble("costo");
-//
-//                Servicio s = new Servicio(id, tipo, descripcion, edad);
-//                lista.add(s);
-//            }
-//
-//            st.close();
-//
-//            conn.close();
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);
-//            JOptionPane.showMessageDialog(null, ex.getMessage(), "Error", 0);
-//        }
-//        return lista;
-//    }
-//
-//
-//    public Throwable msjError(String msj) {
-//        //A implementar...
-//        return null;
-//    }
-//
 }

@@ -1,12 +1,12 @@
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@page pageEncoding="UTF-8" contentType="text/html; charset=UTF-8"%>
 <!DOCTYPE html>
 <html>
     <head>        
-<%@include file="header.jsp" %>
+<%@include file="includes/header.jsp" %>
     </head>
     <body>
-<%@include file="menu.jsp" %>
+<%@include file="includes/menu.jsp" %>
         <div class="container" data-aos="fade-in">
             <div class="row justify-content-center text-center">
                 <div class="col col-lg-6">
@@ -59,13 +59,16 @@
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">                            
-                                <input type="submit" class="btn btn-primary" value="Guardar">                            
+                                <input type="submit" class="btn btn-primary btn-block" value="Guardar">                            
+                            </div>
+                            <div class="col-sm-6">                            
+                                <input type="reset" class="btn btn-light btn-block" value="Cancelar">
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-<%@include file="footer.jsp" %>
+<%@include file="includes/footer.jsp" %>
     </body>
 </html>

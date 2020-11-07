@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <nav class="navbar navbar-expand-lg navbar-dark bg-info">
     <a class="navbar-brand" href="index.jsp">Inicio</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -21,8 +22,20 @@
                     <a class="dropdown-item" href="#">Drop Down 3</a>
                     <a class="dropdown-item" href="#">Drop Down 4</a>
                 </div>
-            </li>
+            </li>            
         </ul>
+
     </div>
-    <a class="nav-link justify-content-end" href="Login">Login</a>    
+    <c:choose>
+        <c:when test="${not empty usr}">
+            <div class="nav-item justify-content-end">        
+                <a class="nav-link btn btn-outline-light justify-content-end" href="MenuAdmin">${usr}: Menú Administrador</a>
+            </div>
+        </c:when>
+        <c:otherwise>
+            <div class="nav-item justify-content-end">        
+                <a class="nav-link btn btn-outline-light justify-content-end" href="Login">Login</a>
+            </div>
+        </c:otherwise>
+    </c:choose>    
 </nav>
