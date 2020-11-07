@@ -30,7 +30,7 @@ public class MenuAdmin extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/menuAdmin.jsp");
             rd.forward(request, response);
         } else {
-            request.setAttribute("mensajeError", "Error. Sesión no iniciada");
+            request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
             RequestDispatcher rd = request.getRequestDispatcher("/Login");
             rd.forward(request, response);
         }

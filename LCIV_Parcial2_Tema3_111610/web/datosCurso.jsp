@@ -34,7 +34,7 @@
                             <textarea class="form-control" id="descripcion"
                                       name="descripcion"
                                       rows="3" required
-                                      placeholder="Descripción"><c:if test="${not empty curso.descripcion}">${curso.descripcion}</c:if></textarea>
+                                      placeholder="Descripción">${curso.descripcion}</textarea>
                             <div class="validate"></div>
                         </div>
                         <div class="form-group row">

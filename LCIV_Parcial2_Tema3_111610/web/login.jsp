@@ -3,8 +3,7 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
-    <head>
-        <!--<title>LCIV - Academia</title>-->
+    <head>        
         <%@include file="includes/header.jsp" %>
     </head>
     <body onload="saludo();">
@@ -14,14 +13,10 @@
                 <div class="col col-lg-6">
                     <h2 id="saludo"></h2>
                     <h3>Introduzca su información de Login</h3>
-                    <%if (request.getAttribute("mensajeError") != null
-                                && !request.getAttribute("mensajeError").equals("")) { %>
-                    <br/>
-                    <h4> ${mensajeError} </h4>
-                    <br/>
-                    <%
-                        }
-                    %>
+                    <c:if test="${not empty mensajeError}">
+                        <h4> ${mensajeError} </h4>
+                    </c:if>
+                    
                 </div>
             </div>
         </div>

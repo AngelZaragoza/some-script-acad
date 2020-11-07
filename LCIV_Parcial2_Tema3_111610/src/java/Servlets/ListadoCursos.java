@@ -4,7 +4,6 @@ package Servlets;
 import AccesoBaseDatos.GestorCursos;
 import Modelo.Curso;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -41,7 +40,7 @@ public class ListadoCursos extends HttpServlet {
             RequestDispatcher rd = request.getRequestDispatcher("/listaCursos.jsp");
             rd.forward(request, response);
         } else {
-            request.setAttribute("mensajeError", "Error. Sesión no iniciada");
+            request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
             RequestDispatcher rd = request.getRequestDispatcher("/Login");
             rd.forward(request, response);
         }

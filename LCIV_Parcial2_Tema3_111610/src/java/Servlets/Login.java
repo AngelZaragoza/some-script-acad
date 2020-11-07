@@ -53,14 +53,14 @@ public class Login extends HttpServlet {
 
         if (usuario.equals("admiral") && password.equals("akbar")) {
             request.getSession().setAttribute("usr", usuario);
-            request.getSession().setMaxInactiveInterval(300);
+            request.getSession().setMaxInactiveInterval(120);
             request.getSession().setAttribute("titulo", "Menú Administrador");
             response.sendRedirect(getServletContext().getContextPath() + "/menuAdmin.jsp");
 
             //RequestDispatcher rd = request.getRequestDispatcher("/menuAdmin.jsp");
             //rd.forward(request, response);
         } else {
-            request.setAttribute("mensajeError", "Usuario o Contraseña incorrecto");
+            request.getSession().setAttribute("mensajeError", "Usuario o Contraseña incorrecto");
             RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
             rd.forward(request, response);
         }

@@ -48,7 +48,7 @@ public class ABMCurso extends HttpServlet {
                 rd.forward(request, response);
             }
         } else {
-            request.setAttribute("mensajeError", "Error. Sesión no iniciada");
+            request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
             RequestDispatcher rd = request.getRequestDispatcher("/Login");
             rd.forward(request, response);
         }
@@ -79,26 +79,27 @@ public class ABMCurso extends HttpServlet {
             if (request.getParameter("activo") != null) {
                 activo = true;
             }
-            String idCurso = request.getParameter("idCurso");
+            int idCurso = Integer.parseInt(request.getParameter("idCurso"));
 
-            Curso curso = new Curso(0, nombre, descripcion, costo, imagenUrl, activo);
+            Curso curso = new Curso(idCurso, nombre, descripcion, costo, imagenUrl, activo);
             GestorCursos gestor = new GestorCursos();
 
             //Chequear si viene desde la opción Alta o Editar
-            if (idCurso == null) {
+            if (idCurso == 0) {
                 gestor.agregarCurso(curso);
-            } else {
-                curso.setIdCurso(Integer.parseInt(idCurso));
+            } else {                
                 gestor.modificarCurso(curso);
             }
 
-            //Redirigir al Listado
+            //Redirigir al Listado por GET
             response.sendRedirect(getServletContext().getContextPath() + "/ListadoCursos");
         
-        } else {
-            request.setAttribute("mensajeError", "Error. Sesión no iniciada");
-            RequestDispatcher rd = request.getRequestDispatcher("/Login");
-            rd.forward(request, response);
+        } else {            
+            //Redirigir al Login por GET
+            request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
+            response.sendRedirect(getServletContext().getContextPath() + "/Login");
+            //RequestDispatcher rd = request.getRequestDispatcher("/Login");
+            //rd.forward(request, response);
         }
     }
 
