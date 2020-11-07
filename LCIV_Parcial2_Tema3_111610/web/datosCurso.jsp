@@ -3,41 +3,46 @@
 <!DOCTYPE html>
 <html>
     <head>        
-<%@include file="includes/header.jsp" %>
+        <%@include file="includes/header.jsp" %>
     </head>
     <body>
-<%@include file="includes/menu.jsp" %>
-        <div class="container" data-aos="fade-in">
-            <div class="row justify-content-center text-center">
-                <div class="col col-lg-6">
-                    <h3>Alta de Curso</h3>
+        <%@include file="includes/menu.jsp" %>
+        <jsp:useBean id="curso" class="Modelo.Curso" scope="request"></jsp:useBean>
+            <div class="container" data-aos="fade-in">
+                <div class="row justify-content-center text-center">
+                    <div class="col col-lg-6">
+                        <h3>${titulo}</h3>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="container" data-aos="fade-up">
-            <div class="row justify-content-center">
-                <div class="col col-lg-6">
-                    <form id="cursos" method="post" action="ABMCurso">
+            <div class="container" data-aos="fade-up">
+                <div class="row justify-content-center">
+                    <div class="col col-lg-6">
+                        <form id="cursos" method="post" action="ABMCurso">
+                            <input type="hidden" name="idCurso" value="${curso.idCurso}"/>
                         <div class="form-group">
                             <label for="curso" class="col-form-label">Nombre del Curso:</label>                
                             <input type="text" class="form-control" id="curso"
                                    name="nombre" required 
+                                   value="${curso.nombre}"
                                    placeholder="Curso"/>                      
                             <div class="validate"></div>
                         </div>
                         <div class="form-group">
                             <label for="descripcion" class="col-form-label">Descripción de contenidos:</label>
                             <textarea class="form-control" id="descripcion"
-                                      name="descripcion" rows="3" required                                      
-                                      placeholder="Descripción"></textarea>                                   
+                                      name="descripcion"
+                                      rows="3" required
+                                      placeholder="Descripción"><c:if test="${not empty curso.descripcion}">${curso.descripcion}</c:if></textarea>
                             <div class="validate"></div>
                         </div>
                         <div class="form-group row">
                             <div class="col-sm-6">
                                 <label for="costo" class="col-form-label">Costo:</label>                
                                 <input type="number" class="form-control" id="costo"
-                                       name="costo" required/>
+                                       name="costo" required
+                                       value="${curso.costo}"/>
                                 <div class="validate"></div>
                             </div>                            
                         </div>
@@ -47,14 +52,19 @@
                             </div>
                             <div class="col-sm">
                                 <input type="checkbox" class="form-check-input" id="activo"
-                                       name="activo"/>
+                                       name="activo"
+                                       <c:if test="${curso.activo}">
+                                        checked
+                                       </c:if>
+                                       />                                        
                             </div>
                             <div class="validate"></div>
                         </div>
                         <div class="form-group">
                             <label for="imagenUrl" class="col-form-label">URL Imagen (opcional):</label>                
                             <input type="text" class="form-control" id="imagenUrl"
-                                   name="imagenUrl"/>
+                                   name="imagenUrl"
+                                   value="${curso.imagenUrl}"/>
                             <div class="validate"></div>
                         </div>
                         <div class="form-group row">
@@ -69,6 +79,6 @@
                 </div>
             </div>
         </div>
-<%@include file="includes/footer.jsp" %>
+        <%@include file="includes/footer.jsp" %>
     </body>
 </html>

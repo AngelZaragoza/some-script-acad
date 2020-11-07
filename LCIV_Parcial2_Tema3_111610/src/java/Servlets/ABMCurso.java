@@ -40,16 +40,12 @@ public class ABMCurso extends HttpServlet {
                 int idCurso = Integer.parseInt(request.getParameter("idCurso"));
                 GestorCursos gestor = new GestorCursos();
                 Curso cursoEdit = gestor.getCurso(idCurso);
-                
+
                 //Setear atributos y enviar petición
                 request.setAttribute("titulo", "Editar Curso");
                 request.setAttribute("curso", cursoEdit);
                 RequestDispatcher rd = request.getRequestDispatcher("/datosCurso.jsp");
                 rd.forward(request, response);
-                try (PrintWriter out = response.getWriter()) {
-
-                    out.print("<h1>OK</h1>");
-                }
             }
         } else {
             request.setAttribute("mensajeError", "Error. Sesión no iniciada");
@@ -70,23 +66,40 @@ public class ABMCurso extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        //Codifica correctamente los caracteres enviados a la BD
-        request.setCharacterEncoding("UTF-8");
+        if (request.getSession().getAttribute("usr") != null) {
+            //Codificar correctamente los caracteres enviados a la BD
+            request.setCharacterEncoding("UTF-8");
 
-        String nombre = request.getParameter("nombre");
-        String descripcion = request.getParameter("descripcion");
-        float costo = Float.parseFloat(request.getParameter("costo"));
-        boolean activo = false;
-        if (request.getParameter("activo") != null) {
-            activo = true;
+            //Tomar parámetros del form y crear objeto Curso
+            String nombre = request.getParameter("nombre");
+            String descripcion = request.getParameter("descripcion");
+            float costo = Float.parseFloat(request.getParameter("costo"));
+            boolean activo = false;
+            String imagenUrl = request.getParameter("imagenUrl");
+            if (request.getParameter("activo") != null) {
+                activo = true;
+            }
+            String idCurso = request.getParameter("idCurso");
+
+            Curso curso = new Curso(0, nombre, descripcion, costo, imagenUrl, activo);
+            GestorCursos gestor = new GestorCursos();
+
+            //Chequear si viene desde la opción Alta o Editar
+            if (idCurso == null) {
+                gestor.agregarCurso(curso);
+            } else {
+                curso.setIdCurso(Integer.parseInt(idCurso));
+                gestor.modificarCurso(curso);
+            }
+
+            //Redirigir al Listado
+            response.sendRedirect(getServletContext().getContextPath() + "/ListadoCursos");
+        
+        } else {
+            request.setAttribute("mensajeError", "Error. Sesión no iniciada");
+            RequestDispatcher rd = request.getRequestDispatcher("/Login");
+            rd.forward(request, response);
         }
-        String imagenUrl = request.getParameter("imagenUrl");
-
-        Curso nuevo = new Curso(0, nombre, descripcion, costo, imagenUrl, activo);
-        GestorCursos gestor = new GestorCursos();
-        gestor.agregarCurso(nuevo);
-
-        response.sendRedirect(getServletContext().getContextPath() + "/MenuAdmin");
     }
 
     /**

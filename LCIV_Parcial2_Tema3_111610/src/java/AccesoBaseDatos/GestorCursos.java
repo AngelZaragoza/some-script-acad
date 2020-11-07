@@ -74,6 +74,33 @@ public class GestorCursos {
 
     }
     
+    //Modificar datos de un Curso
+    //***************************
+    public void modificarCurso(Curso curso) {
+
+        try {
+            abrirConexion();            
+            String sql = "UPDATE Cursos SET nombre = ?, descripcion = ?, costo = ?"
+                    + ", imagenURL = ?, activo = ? WHERE idCurso = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, curso.getNombre());
+            ps.setString(2, curso.getDescripcion());
+            ps.setFloat(3, curso.getCosto());
+            ps.setString(4, curso.getImagenUrl());
+            ps.setBoolean(5, curso.isActivo());
+            ps.setInt(6, curso.getIdCurso());
+
+            ps.executeUpdate();
+            
+
+        } catch (Exception ex) {
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);            
+        } finally {
+            cerrarConexion();
+        }        
+
+    }
+    
     //Listar los Cursos
     //*****************
     public ArrayList<Curso> listadoCursos() {
