@@ -62,7 +62,7 @@
                                 <input type="submit" class="btn btn-primary btn-block" value="Guardar">                            
                             </div>
                             <div class="col-sm-6">                            
-                                <input type="reset" class="btn btn-light btn-block" value="Cancelar">
+                                <input type="reset" class="btn btn-secondary btn-block" value="Cancelar">
                             </div>
                         </div>
                     </form>

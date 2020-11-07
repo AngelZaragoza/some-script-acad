@@ -49,22 +49,22 @@ public class GestorCursos {
         
     }
     
-    //METODOS DE ALTA 
-
+    //Dar de Alta Curso
+    //*****************
     public void agregarCurso(Curso nuevo) {
 
         try {
             abrirConexion();            
             String sql = "INSERT INTO Cursos(nombre, descripcion, costo, imagenURL, activo) values(?,?,?,?,?)";
-            PreparedStatement st = conn.prepareStatement(sql);
-            st.setString(1, nuevo.getNombre());
-            st.setString(2, nuevo.getDescripcion());
-            st.setFloat(3, nuevo.getCosto());
-            st.setString(4, nuevo.getImagenUrl());
-            st.setBoolean(5, nuevo.isActivo());
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setString(1, nuevo.getNombre());
+            ps.setString(2, nuevo.getDescripcion());
+            ps.setFloat(3, nuevo.getCosto());
+            ps.setString(4, nuevo.getImagenUrl());
+            ps.setBoolean(5, nuevo.isActivo());
 
-            st.executeUpdate();
-            st.close();
+            ps.executeUpdate();
+            
 
         } catch (Exception ex) {
             Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);            
@@ -74,6 +74,8 @@ public class GestorCursos {
 
     }
     
+    //Listar los Cursos
+    //*****************
     public ArrayList<Curso> listadoCursos() {
 
         ArrayList<Curso> lista = new ArrayList<>();
@@ -95,7 +97,7 @@ public class GestorCursos {
                 lista.add(cur);
             }
 
-            st.close();
+            rs.close();
 
         } catch (SQLException ex) {
             Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,6 +108,41 @@ public class GestorCursos {
         return lista;
         
     }
+    
+    //Recuperar Curso con su id
+    //*************************
+    public Curso getCurso(int idCurso) {
+        
+        Curso cur = null;
+        
+        try {
 
+            abrirConexion();
+            String sql = "SELECT * FROM Cursos WHERE idCurso = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, idCurso);
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                String nombre = rs.getString("nombre");
+                String descripcion = rs.getString("descripcion");
+                float costo = rs.getFloat("costo");
+                boolean activo = rs.getBoolean("activo");
+                String imagenUrl = rs.getString("imagenUrl");
+
+                cur = new Curso(idCurso, nombre, descripcion, costo, imagenUrl, activo);
+            }
+
+            rs.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cerrarConexion();
+        }
+        
+        return cur;
+        
+    }
 
 }

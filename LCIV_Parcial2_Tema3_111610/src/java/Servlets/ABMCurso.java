@@ -30,9 +30,27 @@ public class ABMCurso extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getSession().getAttribute("usr") != null) {
-            request.setAttribute("titulo", "Datos del Curso");
-            RequestDispatcher rd = request.getRequestDispatcher("/datosCurso.jsp");
-            rd.forward(request, response);
+            String modo = request.getParameter("modo");
+            if (modo.equals("alta")) {
+                request.setAttribute("titulo", "Alta de Curso");
+                RequestDispatcher rd = request.getRequestDispatcher("/datosCurso.jsp");
+                rd.forward(request, response);
+            } else if (modo.equals("editar")) {
+                //Tomar parámetro idCurso, buscar en BD y devolver objeto Curso
+                int idCurso = Integer.parseInt(request.getParameter("idCurso"));
+                GestorCursos gestor = new GestorCursos();
+                Curso cursoEdit = gestor.getCurso(idCurso);
+                
+                //Setear atributos y enviar petición
+                request.setAttribute("titulo", "Editar Curso");
+                request.setAttribute("curso", cursoEdit);
+                RequestDispatcher rd = request.getRequestDispatcher("/datosCurso.jsp");
+                rd.forward(request, response);
+                try (PrintWriter out = response.getWriter()) {
+
+                    out.print("<h1>OK</h1>");
+                }
+            }
         } else {
             request.setAttribute("mensajeError", "Error. Sesión no iniciada");
             RequestDispatcher rd = request.getRequestDispatcher("/Login");
@@ -51,22 +69,23 @@ public class ABMCurso extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         //Codifica correctamente los caracteres enviados a la BD
         request.setCharacterEncoding("UTF-8");
-        
+
         String nombre = request.getParameter("nombre");
         String descripcion = request.getParameter("descripcion");
         float costo = Float.parseFloat(request.getParameter("costo"));
         boolean activo = false;
-        if (request.getParameter("activo") != null)
+        if (request.getParameter("activo") != null) {
             activo = true;
+        }
         String imagenUrl = request.getParameter("imagenUrl");
-        
+
         Curso nuevo = new Curso(0, nombre, descripcion, costo, imagenUrl, activo);
         GestorCursos gestor = new GestorCursos();
         gestor.agregarCurso(nuevo);
-        
+
         response.sendRedirect(getServletContext().getContextPath() + "/MenuAdmin");
     }
 

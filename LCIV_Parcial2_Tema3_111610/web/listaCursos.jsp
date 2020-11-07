@@ -31,7 +31,7 @@
                             <td>${curso.descripcion}</td>
                             <td>${curso.costo}</td>
                             <td>${curso.activo}</td>
-                            <td><a href="#">${curso.idCurso}</a></td>
+                            <td><a href="ABMCurso?modo=editar&idCurso=${curso.idCurso}">Editar</a></td>
                             <td><img src="${curso.imagenUrl}" class="img-fluid"></a></td>
                         </tr>
                     </c:forEach>                    
