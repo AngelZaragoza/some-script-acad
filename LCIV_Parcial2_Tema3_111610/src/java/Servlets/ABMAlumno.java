@@ -76,11 +76,8 @@ public class ABMAlumno extends HttpServlet {
             String legajo = request.getParameter("legajo");
             String email = request.getParameter("email");
             String fechaNac = request.getParameter("fechaNac");
-            boolean activo = Boolean.parseBoolean(request.getParameter("activo"));
-            
-//            if (request.getParameter("activo") != null) {
-//                activo = true;
-//            }
+            boolean activo = Boolean.parseBoolean(request.getParameter("activo"));            
+
             int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
 
             Alumno alumno = new Alumno(idAlumno, legajo, apellido, nombre, direccion, email, fechaNac, activo);

@@ -19,7 +19,7 @@
         <div class="container" data-aos="fade-up">
             <div class="row justify-content-center">
                 <div class="col col-lg-6">
-                    <form id="cursos" method="post" action="ABMAlumno">
+                    <form id="alumnos" method="post" action="ABMAlumno">
                         <input type="hidden" name="idAlumno" value="${alumno.idAlumno}"/>
                         <div class="form-group row">
                             <div class="col-sm-6">
@@ -70,8 +70,7 @@
                                 <label for="fechaNac" class="col-form-label">Fecha de Nacimiento:</label>                
                                 <input type="date" class="form-control" id="fechaNac"
                                        name="fechaNac"
-                                       value="${alumno.fechaNac}"
-                                       placeholder="Legajo"/>
+                                       value="${alumno.fechaNac}"/>
                                 <div class="validate"></div>
                             </div>
                         </div>
@@ -104,9 +103,6 @@
                 </div>
             </div>
         </div>        
-        
-        
-        
         
         <%@include file="includes/footer.jsp" %>
     </body>
