@@ -22,6 +22,7 @@
                     <th>Descripción</th>
                     <th>Costo</th>
                     <th>Activo</th>
+                    <th>Imagen</th>
                     <th colspan="2">Acciones</th>
                 </thead>
                 <tbody>
@@ -31,8 +32,18 @@
                             <td>${curso.descripcion}</td>
                             <td>${curso.costo}</td>
                             <td>${curso.activo}</td>
-                            <td><a href="ABMCurso?modo=editar&idCurso=${curso.idCurso}">Editar</a></td>
                             <td><img src="${curso.imagenUrl}" class="img-fluid"></a></td>
+                            <td>
+                                <a href="ABMCurso?modo=editar&idCurso=${curso.idCurso}"
+                                   class="btn btn-success">
+                                    Editar</a>
+                            </td>
+                            <td>
+                                <a href="#"
+                                   class="btn btn-outline-danger">
+                                    Eliminar</a>
+                            </td>
+                            
                         </tr>
                     </c:forEach>                    
                 </tbody>

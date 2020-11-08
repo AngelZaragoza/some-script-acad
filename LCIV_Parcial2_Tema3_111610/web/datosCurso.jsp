@@ -8,19 +8,19 @@
     <body>
         <%@include file="includes/menu.jsp" %>
         <jsp:useBean id="curso" class="Modelo.Curso" scope="request"></jsp:useBean>
-            <div class="container" data-aos="fade-in">
-                <div class="row justify-content-center text-center">
-                    <div class="col col-lg-6">
-                        <h3>${titulo}</h3>
-                    </div>
+        <div class="container" data-aos="fade-in">
+            <div class="row justify-content-center text-center">
+                <div class="col col-lg-6">
+                    <h3>${titulo}</h3>
                 </div>
             </div>
+        </div>
 
-            <div class="container" data-aos="fade-up">
-                <div class="row justify-content-center">
-                    <div class="col col-lg-6">
-                        <form id="cursos" method="post" action="ABMCurso">
-                            <input type="hidden" name="idCurso" value="${curso.idCurso}"/>
+        <div class="container" data-aos="fade-up">
+            <div class="row justify-content-center">
+                <div class="col col-lg-6">
+                    <form id="cursos" method="post" action="ABMCurso">
+                        <input type="hidden" name="idCurso" value="${curso.idCurso}"/>
                         <div class="form-group">
                             <label for="curso" class="col-form-label">Nombre del Curso:</label>                
                             <input type="text" class="form-control" id="curso"
@@ -46,20 +46,6 @@
                                 <div class="validate"></div>
                             </div>                            
                         </div>
-                        <div class="form-group row">
-                            <div class="col-sm-4">
-                                <label for="activo" class="form-check-label">Curso disponible?</label>                
-                            </div>
-                            <div class="col-sm">
-                                <input type="checkbox" class="form-check-input" id="activo"
-                                       name="activo"
-                                       <c:if test="${curso.activo}">
-                                        checked
-                                       </c:if>
-                                       />                                        
-                            </div>
-                            <div class="validate"></div>
-                        </div>
                         <div class="form-group">
                             <label for="imagenUrl" class="col-form-label">URL Imagen (opcional):</label>                
                             <input type="text" class="form-control" id="imagenUrl"
@@ -67,6 +53,19 @@
                                    value="${curso.imagenUrl}"/>
                             <div class="validate"></div>
                         </div>
+                        <div class="form-row">
+                            <div class="col-sm-6">
+                                <div class="form-check">
+                                    <input type="checkbox" class="form-check-input" id="activo"
+                                       name="activo" 
+                                       <c:if test="${curso.activo}">checked</c:if>
+                                       <c:if test="${curso.idCurso == 0}">checked</c:if>/>
+                                    <label for="activo" class="form-check-label">Curso disponible?</label>
+                                </div>
+                                <div class="validate"></div>
+                            </div>                            
+                        </div>                        
+                        <br>
                         <div class="form-group row">
                             <div class="col-sm-6">                            
                                 <input type="submit" class="btn btn-primary btn-block" value="Guardar">                            

@@ -21,7 +21,7 @@
                 <div class="card-body">                    
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="#">Alta de Alumno</a>
+                            <a class="btn btn-secondary btn-block" href="ABMAlumno?modo=alta">Alta de Alumno</a>
                         </li>
                         <li class="list-group-item">
                             <a class="btn btn-secondary btn-block" href="#">Listado de Alumnos</a>
