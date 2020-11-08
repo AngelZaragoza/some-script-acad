@@ -24,7 +24,7 @@
                             <a class="btn btn-secondary btn-block" href="ABMAlumno?modo=alta">Alta de Alumno</a>
                         </li>
                         <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="#">Listado de Alumnos</a>
+                            <a class="btn btn-secondary btn-block" href="ListadoAlumnos">Listado de Alumnos</a>
                         </li>                        
                     </ul>
                 </div>

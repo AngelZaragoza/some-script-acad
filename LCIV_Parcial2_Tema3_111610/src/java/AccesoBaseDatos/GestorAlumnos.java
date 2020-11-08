@@ -118,7 +118,7 @@ public class GestorAlumnos {
             ResultSet rs = st.executeQuery("SELECT * FROM Alumnos");
 
             while (rs.next()) {
-                int idAlumno = rs.getInt("idCurso");
+                int idAlumno = rs.getInt("idAlumno");
                 String legajo = rs.getString("legajo");
                 String apellido = rs.getString("apellido");
                 String nombre = rs.getString("nombre");

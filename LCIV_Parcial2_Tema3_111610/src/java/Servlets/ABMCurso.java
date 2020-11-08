@@ -3,7 +3,6 @@ package Servlets;
 import AccesoBaseDatos.GestorCursos;
 import Modelo.Curso;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -73,12 +72,9 @@ public class ABMCurso extends HttpServlet {
             //Tomar parámetros del form y crear objeto Curso
             String nombre = request.getParameter("nombre");
             String descripcion = request.getParameter("descripcion");
-            float costo = Float.parseFloat(request.getParameter("costo"));
-            boolean activo = false;
+            float costo = Float.parseFloat(request.getParameter("costo"));            
             String imagenUrl = request.getParameter("imagenUrl");
-            if (request.getParameter("activo") != null) {
-                activo = true;
-            }
+            boolean activo = Boolean.parseBoolean(request.getParameter("activo"));            
             int idCurso = Integer.parseInt(request.getParameter("idCurso"));
 
             Curso curso = new Curso(idCurso, nombre, descripcion, costo, imagenUrl, activo);
@@ -98,8 +94,7 @@ public class ABMCurso extends HttpServlet {
             //Redirigir al Login por GET
             request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
             response.sendRedirect(getServletContext().getContextPath() + "/Login");
-            //RequestDispatcher rd = request.getRequestDispatcher("/Login");
-            //rd.forward(request, response);
+            
         }
     }
 

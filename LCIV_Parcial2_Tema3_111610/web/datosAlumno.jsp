@@ -78,11 +78,15 @@
                         <div class="form-row">
                             <div class="col-sm-6">
                                 <div class="form-check">                                    
-                                    <input type="checkbox" class="form-check-input" id="activo"
-                                           name="activo" 
-                                           <c:if test="${alumno.activo}">checked</c:if>
-                                           <c:if test="${alumno.idAlumno == 0}">checked</c:if>>
-                                    <label for="activo" class="form-check-label">Alumno activo?</label>
+                                    <input type="hidden" name="activo" 
+                                        <c:if test="${alumno.idAlumno == 0}">value="true"</c:if>
+                                        <c:if test="${alumno.idAlumno > 0}">value="${alumno.activo}"</c:if>/>
+                                    <input type="checkbox" class="form-check-input" id="indicador"
+                                        name="indicador" 
+                                        <c:if test="${alumno.activo}">checked</c:if>
+                                        <c:if test="${alumno.idAlumno == 0}">checked</c:if>
+                                        disabled>
+                                    <label for="indicador" class="form-check-label">Alumno activo?</label>
                                 </div>
                                 <div class="validate"></div>
                             </div>                            

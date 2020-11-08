@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Servlets;
 
 import AccesoBaseDatos.GestorAlumnos;
-import AccesoBaseDatos.GestorCursos;
 import Modelo.Alumno;
-import Modelo.Curso;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -83,11 +76,11 @@ public class ABMAlumno extends HttpServlet {
             String legajo = request.getParameter("legajo");
             String email = request.getParameter("email");
             String fechaNac = request.getParameter("fechaNac");
-            boolean activo = false;
+            boolean activo = Boolean.parseBoolean(request.getParameter("activo"));
             
-            if (request.getParameter("activo") != null) {
-                activo = true;
-            }
+//            if (request.getParameter("activo") != null) {
+//                activo = true;
+//            }
             int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
 
             Alumno alumno = new Alumno(idAlumno, legajo, apellido, nombre, direccion, email, fechaNac, activo);

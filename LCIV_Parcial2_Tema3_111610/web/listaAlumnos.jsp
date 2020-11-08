@@ -11,41 +11,45 @@
         <br>
         <div class="container" data-aos="fade-in">
             <div class="row justify-content-center">
-                <h3 class="">Listado de Cursos Cargados</h3>
+                <h3 class="">Listado de Alumnos Cargados</h3>
             </div>
         </div>        
         <hr>
         <div class="container" data-aos="fade-up">
             <table class="table table-hover">
                 <thead class="thead-light">
+                    <th>Apellido</th>
                     <th>Nombre</th>
-                    <th>Descripción</th>
-                    <th>Costo</th>
-                    <th>Estado</th>                    
+                    <th>Legajo</th>
+                    <th>Correo Electrónico</th>
+                    <th>Dirección</th>
+                    <th>Fecha Nacimiento</th>
+                    <th>Estado</th>
                     <th colspan="2">Acciones</th>
-                    <th>Imagen</th>
                 </thead>
                 <tbody>
-                    <c:forEach var="curso" items="${lista}">
+                    <c:forEach var="alumno" items="${lista}">
                         <tr>
-                            <td>${curso.nombre}</td>
-                            <td>${curso.descripcion}</td>
-                            <td>${curso.costo}</td>
+                            <td>${alumno.apellido}</td>
+                            <td>${alumno.nombre}</td>
+                            <td>${alumno.legajo}</td>
+                            <td>${alumno.email}</td>
+                            <td>${alumno.direccion}</td>
+                            <td>${alumno.fechaNac}</td>
                             <td>
                                 <c:choose>
-                                    <c:when test="${curso.activo}">Activo</c:when>
-                                    <c:when test="${not curso.activo}">De Baja</c:when>
+                                    <c:when test="${alumno.activo}">Activo</c:when>
+                                    <c:when test="${not alumno.activo}">De Baja</c:when>
                                 </c:choose>
-                            </td>                            
+                            </td>
                             <td>
-                                <a href="ABMCurso?modo=editar&idCurso=${curso.idCurso}"
+                                <a href="ABMAlumno?modo=editar&idAlumno=${alumno.idAlumno}"
                                    class="btn btn-success"> Editar </a>
                             </td>
                             <td>
                                 <a href="#"
                                    class="btn btn-outline-danger">Eliminar</a>
-                            </td>
-                            <td><img src="${curso.imagenUrl}" class="img-fluid"></a></td>
+                            </td>                            
                         </tr>
                     </c:forEach>                    
                 </tbody>

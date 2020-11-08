@@ -1,8 +1,9 @@
-
 package Servlets;
 
+import AccesoBaseDatos.GestorAlumnos;
+import Modelo.Alumno;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -14,9 +15,10 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Angel
  */
-@WebServlet(name = "Login", urlPatterns = {"/Login"})
-public class Login extends HttpServlet {
+@WebServlet(name = "ListadoAlumnos", urlPatterns = {"/ListadoAlumnos"})
+public class ListadoAlumnos extends HttpServlet {
 
+    
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -28,12 +30,18 @@ public class Login extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getSession().setAttribute("titulo", "Login");
-        if (request.getSession().getAttribute("usr") == null) {
-            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
+        if (request.getSession().getAttribute("usr") != null) {
+            GestorAlumnos gestor = new GestorAlumnos();
+            ArrayList<Alumno> lista = gestor.listadoAlumnos();
+            
+            request.setAttribute("lista", lista);
+            request.setAttribute("titulo", "Listado de Alumnos");
+            RequestDispatcher rd = request.getRequestDispatcher("/listaAlumnos.jsp");
             rd.forward(request, response);
         } else {
-            response.sendRedirect(getServletContext().getContextPath() + "/index.jsp");
+            request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
+            RequestDispatcher rd = request.getRequestDispatcher("/Login");
+            rd.forward(request, response);
         }
     }
 
@@ -48,22 +56,7 @@ public class Login extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String usuario = request.getParameter("txtUsuario");
-        String password = request.getParameter("txtPassword");
-
-        if (usuario.equals("admiral") && password.equals("akbar")) {
-            request.getSession().setAttribute("usr", usuario);
-            request.getSession().setMaxInactiveInterval(180);
-            request.getSession().setAttribute("titulo", "Menú Administrador");
-            response.sendRedirect(getServletContext().getContextPath() + "/menuAdmin.jsp");
-
-            //RequestDispatcher rd = request.getRequestDispatcher("/menuAdmin.jsp");
-            //rd.forward(request, response);
-        } else {
-            request.getSession().setAttribute("mensajeError", "Usuario o Contraseña incorrecto");
-            RequestDispatcher rd = request.getRequestDispatcher("/login.jsp");
-            rd.forward(request, response);
-        }
+        
     }
 
     /**
