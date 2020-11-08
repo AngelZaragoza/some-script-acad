@@ -51,34 +51,6 @@ public class GestorBD {
     }
     
 //    
-//    //Dar de Alta Alumno
-//    //*****************
-//    public void agregarAlumno(Alumno nuevo) {
-//
-//        try {
-//            abrirConexion();            
-//            String sql = "INSERT INTO Alumnos(legajo, apellido, nombre, direccion"
-//                    + ", email, fechaNac, activo) values(?,?,?,?,?,?,?)";
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setString(1, nuevo.getLegajo());
-//            ps.setString(2, nuevo.getApellido());
-//            ps.setString(3, nuevo.getNombre());
-//            ps.setString(4, nuevo.getDireccion());
-//            ps.setString(5, nuevo.getEmail());
-//            ps.setString(6, nuevo.getFechaNac());
-//            ps.setBoolean(7, nuevo.isActivo());
-//
-//            ps.executeUpdate();
-//            
-//
-//        } catch (Exception ex) {
-//            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);            
-//        } finally {
-//            cerrarConexion();
-//        }        
-//
-//    }
-//    
 //    //Modificar datos de un Alumno
 //    //***************************
 //    public void modificarAlumno(Alumno alumno) {
@@ -149,14 +121,15 @@ public class GestorBD {
 
             abrirConexion();
             Statement st = conn.createStatement();
-            String sql = "SELECT idCurso, nombre + ' - $ ' + LTRIM(STR(costo, 10, 2)) AS nombreCurso FROM Cursos";
+            String sql = "SELECT idCurso, nombre + ' - $ ' + LTRIM(STR(costo, 10, 2)) AS nombreCurso"
+                    + ", costo FROM Cursos";
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
                 int idCurso = rs.getInt("idCurso");
                 String nombreCurso = rs.getString("nombreCurso");                
-
-                DTOComboCursos cur = new DTOComboCursos(idCurso, nombreCurso);
+                float costo = rs.getFloat("costo");
+                DTOComboCursos cur = new DTOComboCursos(idCurso, nombreCurso, costo);
                 lista.add(cur);
             }
 
@@ -204,6 +177,34 @@ public class GestorBD {
         return lista;
         
     }
+
+    //Dar de Alta Inscripción
+    //************************
+    public void agregarInscripcion (Inscripcion nueva) {
+
+        try {
+            abrirConexion();            
+            String sql = "INSERT INTO Inscripciones (idAlumno, idCurso, idDescuento"
+                    + ", fechaInscripcion, montoDescuento, montoAbonado) values(?,?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, nueva.getIdAlumno());
+            ps.setInt(2, nueva.getIdCurso());
+            ps.setInt(3, nueva.getIdDescuento());
+            ps.setString(4, nueva.getFechaInscripcion());
+            ps.setFloat(5, nueva.getMontoDescuento());
+            ps.setFloat(6, nueva.getMontoAbonado());            
+
+            ps.executeUpdate();
+            
+
+        } catch (Exception ex) {
+            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);            
+        } finally {
+            cerrarConexion();
+        }        
+
+    }
+
 //    
 //    //Recuperar Alumno con su id
 //    //*************************

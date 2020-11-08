@@ -7,14 +7,16 @@ package DTO;
 public class DTOComboCursos {
     private int idCurso;
     private String nombreCurso;
+    private float costo;
     
     // CONSTRUCTORES
     
     public DTOComboCursos() {}
 
-    public DTOComboCursos(int idCurso, String nombreCurso) {
+    public DTOComboCursos(int idCurso, String nombreCurso, float costo) {
         this.idCurso = idCurso;
         this.nombreCurso = nombreCurso;
+        this.costo = costo;
     }
     
     // GETTERS
@@ -26,6 +28,9 @@ public class DTOComboCursos {
     public String getNombreCurso() {
         return nombreCurso;
     }    
-    
+
+    public float getCosto() {
+        return costo;
+    }    
     
 }

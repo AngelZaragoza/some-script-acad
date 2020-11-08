@@ -8,23 +8,20 @@
     </head>
     <body onload="saludo();">
         <%@include file="includes/menu.jsp" %>
-        <div class="container" data-aos="fade-in">
+        <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-in">
             <div class="row justify-content-center text-center">
                 <div class="col col-lg-6">
                     <h2 id="saludo"></h2>
                     <h3>Introduzca su información de Login</h3>
                     <c:if test="${not empty mensajeError}">
                         <h4> ${mensajeError} </h4>
-                    </c:if>
-                    
+                    </c:if>                    
                 </div>
             </div>
         </div>
-
-
         <div class="container" data-aos="fade-up">
             <div class="row justify-content-center">
-                <div class="col col-lg-6">
+                <div class="col col-lg-6 shadow p-3 mb-5 bg-white rounded">
                     <form id="login" method="post" action="Login">
                         <div class="form-group">
                             <label for="user" class="col-form-label">Usuario:</label>                

@@ -2,6 +2,7 @@ package Servlets;
 
 import Modelo.VMCombosInscripcion;
 import AccesoBaseDatos.*;
+import Modelo.Inscripcion;
 import java.io.IOException;
 import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
@@ -62,7 +63,31 @@ public class Inscripciones extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+        if (request.getSession().getAttribute("usr") != null) {
+            //Codificar correctamente los caracteres enviados a la BD
+            request.setCharacterEncoding("UTF-8");
+            
+            //Tomar parámetros del form y crear objeto Inscripcion
+            int idCurso = Integer.parseInt(request.getParameter("idCurso"));
+            int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
+            int idDescuento = Integer.parseInt(request.getParameter("idDescuento"));            
+            String fechaInscripcion = request.getParameter("fechaInscripcion");            
+            
+            
+            float montoDescuento = Float.parseFloat(request.getParameter("montoDescuento"));
+            float montoAbonado = Float.parseFloat(request.getParameter("montoAbonado"));
+            
+            Inscripcion insc = new Inscripcion(0, idAlumno, idCurso, idDescuento, fechaInscripcion, montoDescuento, montoAbonado);
+            GestorBD gestor = new GestorBD();
+            
+            gestor.agregarInscripcion(insc);
+            response.sendRedirect(getServletContext().getContextPath() + "/MenuAdmin");
+            
+        } else {            
+            //Redirigir al Login por GET
+            request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
+            response.sendRedirect(getServletContext().getContextPath() + "/Login");            
+        }
     }
 
     /**

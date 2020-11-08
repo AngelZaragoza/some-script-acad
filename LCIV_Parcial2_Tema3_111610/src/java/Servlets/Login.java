@@ -55,7 +55,7 @@ public class Login extends HttpServlet {
             request.getSession().setAttribute("usr", usuario);
             request.getSession().setMaxInactiveInterval(180);
             request.getSession().setAttribute("titulo", "Menú Administrador");
-            response.sendRedirect(getServletContext().getContextPath() + "/menuAdmin.jsp");
+            response.sendRedirect(getServletContext().getContextPath() + "/MenuAdmin");
 
             //RequestDispatcher rd = request.getRequestDispatcher("/menuAdmin.jsp");
             //rd.forward(request, response);

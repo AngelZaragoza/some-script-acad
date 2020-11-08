@@ -8,7 +8,7 @@
     <body onload="saludo();">
         <%@include file="includes/menu.jsp" %>
         <jsp:useBean id="combos" class="Modelo.VMCombosInscripcion" scope="request"></jsp:useBean>
-        <div class="container" data-aos="fade-in">
+        <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-in">
             <div class="row justify-content-center text-center">
                 <div class="col col-lg-6">
                     <h3>${titulo}</h3>
@@ -16,10 +16,10 @@
             </div>
         </div>
                 
-        <div class="container shadow p-3 mb-5 bg-white rounded" data-aos="fade-up">
+        <div class="container" data-aos="fade-up">
             <div class="row justify-content-center">
-                <div class="col col-lg-6">
-                    <form id="inscripciones" method="get">
+                <div class="col col-lg-6 shadow p-3 mb-5 bg-white rounded">
+                    <form id="inscripciones" method="post" action="Inscripciones">
                         <!-- <input type="hidden" name="idInscripcion" value="${alumno.idAlumno}"/> -->
                         <div class="form-group">                            
                             <label for="curso" class="col-form-label">Curso:</label>
@@ -60,7 +60,17 @@
                                        required/>
                                 <div class="validate"></div>
                             </div>
-                        </div>                        
+                        </div>
+                        <div class="form-group row">
+                            <div class="col-sm-6">                            
+                                <label for="calc-desc" class="col-form-label">Importe a Descontar:</label>
+                                <input type="text" class="form-control" id="calc-desc" value="" readonly>
+                            </div>
+                            <div class="col-sm-6">                            
+                                <label for="calc-neto" class="col-form-label">Importe Neto a Cobrar:</label>
+                                <input type="text" class="form-control" id="calc-neto" value="" readonly>
+                            </div>
+                        </div>
                                 
                         <br>                        
                         <div class="form-group row">
