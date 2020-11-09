@@ -11,7 +11,7 @@
         <br>
         <div class="container" data-aos="fade-left">
             <div class="row justify-content-center">
-                <h1>Bienvenido ${usr} ! </h1>
+                <h1>Bienvenido ${usr} </h1>
             </div>
         </div>
         <hr>

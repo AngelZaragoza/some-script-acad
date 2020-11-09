@@ -11,16 +11,35 @@
         <br>
         <div class="container" data-aos="fade-left">
             <div class="row justify-content-center">
-                <h1>Bienvenido a la Academia</h1>
+                <h1>Bienvenido a la Academia SomeScript</h1>
             </div>
         </div>        
         <hr>
-                
-        <div class="container-fluid"  data-aos="fade-up>
-            <p">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
-                    Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+
+        <div class="container-fluid"  data-aos="fade-up">
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
             </p>
         </div>
+        <br>
+        <br>
+        
+
+        <div class="container-fluid"  data-aos="fade-left">
+            <div class="row">
+                <div class="col-sm-6"
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                    Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+                    </p>
+                </div>
+                <div class="col-sm-6"
+                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Duis aute irure dolor in reprehenderit
+                    Asperiores dolores sed et. Tenetur quia eos. Autem tempore quibusdam vel necessitatibus optio ad corporis.
+                    </p>
+                </div>
+            </div>
+        </div>
+
         <%@include file="includes/footer.jsp" %>
     </body>
 </html>

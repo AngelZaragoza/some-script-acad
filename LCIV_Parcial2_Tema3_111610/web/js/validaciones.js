@@ -29,12 +29,34 @@ function saludo() {
         case "inscripciones":
             formulario.addEventListener("submit", validaInscripcion);
             break;
+        case "programas":
+            formulario.addEventListener("submit", validaUpload);
+            break;            
+        case "cursos":
+            formulario.addEventListener("submit", validaCurso);
+            break;
     }
 
 }
 
+function validaCurso(e) {
+    validaNumero(e);
+}
+
 function validaInscripcion(e) {
     validaCombos(e);
+}
+
+function validaUpload(e) {
+    validaCombos(e);    
+}
+
+function validaNumero(e) {
+    let costo = document.getElementById("costo");
+    if (costo.value < 0) {
+        alert('Debe seleccionar un valor positivo');
+            e.preventDefault();
+    }
 }
 
 function validaCombos(e) {

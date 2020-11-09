@@ -42,6 +42,7 @@
                                 <label for="costo" class="col-form-label">Costo:</label>                
                                 <input type="number" class="form-control" id="costo"
                                        name="costo" required
+                                       min="0"
                                        value="${curso.costo}"/>
                                 <div class="validate"></div>
                             </div>                            

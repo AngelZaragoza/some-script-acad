@@ -35,7 +35,7 @@
                             <td>${prog.descripcionPrograma}</td>
                             <td>${prog.cantidadDescargas}</td>
                             <td>
-                                <a href="Programas?modo=descargar?idPrograma=${prog.idPrograma}"
+                                <a href="Programas?modo=descargar&idPrograma=${prog.idPrograma}"
                                     class="btn btn-success btn-block">Descargar</a>
                             </td>                            
                         </tr>

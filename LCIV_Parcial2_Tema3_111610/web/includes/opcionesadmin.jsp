@@ -64,39 +64,4 @@
             </div>
         </div>
     </div>
-    <!-- <br>
-    <hr>
-    <br>
-    <div class="row justify-content-center">
-        <div class="col-sm-4">
-            <div class="card">
-                <h2 class="card-header text-center bg-info text-white">Carga de Programas</h2>
-                <div class="card-body">                    
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="ABMCurso">Subir un programa</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="#">--------</a>
-                        </li>                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-        <div class="col-sm-4">
-            <div class="card">
-                <h2 class="card-header text-center bg-info text-white">A implementar</h2>
-                <div class="card-body">                    
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="#">*********</a>
-                        </li>
-                        <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="#">##########</a>
-                        </li>                        
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div> -->
+    

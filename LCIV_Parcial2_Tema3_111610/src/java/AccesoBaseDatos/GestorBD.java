@@ -322,43 +322,27 @@ public class GestorBD {
         return lista;
         
     }
-//    
-//    //Recuperar Alumno con su id
-//    //*************************
-//    public Alumno getAlumno(int idAlumno) {
-//        
-//        Alumno alumno = null;
-//        
-//        try {
-//
-//            abrirConexion();
-//            String sql = "SELECT * FROM Alumnos WHERE idAlumno = ?";
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setInt(1, idAlumno);
-//            ResultSet rs = ps.executeQuery();
-//
-//            if (rs.next()) {
-//                String legajo = rs.getString("legajo");
-//                String apellido = rs.getString("apellido");
-//                String nombre = rs.getString("nombre");
-//                String direccion = rs.getString("direccion");
-//                String email = rs.getString("email");
-//                String fechaNac = rs.getString("fechaNac");
-//                boolean activo = rs.getBoolean("activo");
-//
-//                alumno = new Alumno(idAlumno, legajo, apellido, nombre, direccion, email, fechaNac, activo);
-//            }
-//
-//            rs.close();
-//
-//        } catch (SQLException ex) {
-//            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);
-//        } finally {
-//            cerrarConexion();
-//        }
-//        
-//        return alumno;
-//        
-//    }
+    //Incrementar Contador Descargas de Programas
+    //***************************
+    public void contarDescarga(int idPrograma) {
+
+        try {
+            abrirConexion();            
+            String sql = "UPDATE Programas\n" +
+                        "    SET cantidadDescargas = cantidadDescargas + 1\n" +
+                        "WHERE idPrograma = ?;";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, idPrograma);
+
+            ps.executeUpdate();
+            
+
+        } catch (Exception ex) {
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);            
+        } finally {
+            cerrarConexion();
+        }        
+
+    }
 
 }

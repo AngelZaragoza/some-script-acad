@@ -11,10 +11,7 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Programas?modo=listadoPublico">Lista de Descargas</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Contacto</a>
-            </li>
+            </li>            
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Drop Down</a>
                 <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -34,7 +31,7 @@
         </c:when>
         <c:otherwise>
             <div class="nav-item justify-content-end">        
-                <a class="nav-link btn btn-outline-light justify-content-end" href="Login">Login</a>
+                <a class="nav-link btn btn-outline-light justify-content-end" href="Login">Login Admin</a>
             </div>
         </c:otherwise>
     </c:choose>    

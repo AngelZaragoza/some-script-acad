@@ -83,6 +83,10 @@ public class Programas extends HttpServlet {
         } else if (modo.equals("descargar")) {
             
             int idPrograma = Integer.parseInt(request.getParameter("idPrograma"));
+            gestor.contarDescarga(idPrograma);
+            request.setAttribute("titulo", "Gracias por Descargar");
+            RequestDispatcher rd = request.getRequestDispatcher("/index.jsp");
+            rd.forward(request, response);
             
         } 
     }

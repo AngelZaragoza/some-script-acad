@@ -45,6 +45,10 @@ public class ABMCurso extends HttpServlet {
                 request.setAttribute("curso", cursoEdit);
                 RequestDispatcher rd = request.getRequestDispatcher("/datosCurso.jsp");
                 rd.forward(request, response);
+            } else if (modo.equals("cambiarEstado")) {
+                //Tomar parámetro idCurso, buscar en BD y cambiar estado
+                int idCurso = Integer.parseInt(request.getParameter("idCurso"));
+                // No llegué...
             }
         } else {
             request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");

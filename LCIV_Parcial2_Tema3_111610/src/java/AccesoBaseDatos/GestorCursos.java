@@ -102,6 +102,28 @@ public class GestorCursos {
 
     }
     
+    //Eliminar o Reactivar un Curso
+    //***************************
+    public void cambiarEstadoCurso(int idCurso, boolean activo) {
+
+        try {
+            abrirConexion();            
+            String sql = "UPDATE Cursos SET activo = ? WHERE idCurso = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);            
+            ps.setBoolean(1, activo);
+            ps.setInt(2, idCurso);
+
+            ps.executeUpdate();
+            
+
+        } catch (Exception ex) {
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);            
+        } finally {
+            cerrarConexion();
+        }        
+
+    }
+    
     //RECUPERACION DE DATOS
 
     //Listar los Cursos

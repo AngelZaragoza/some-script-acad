@@ -42,7 +42,8 @@
                                         <a href="ABMAlumno?modo=editar&idAlumno=${alumno.idAlumno}"
                                            class="btn btn-success btn-block"> Editar </a>
                                     </td>
-                                    <td><a href="#" class="btn btn-outline-danger btn-block">Eliminar</a></td>
+                                    <td><a href="ABMAlumno?modo=cambiarEstado&idAlumno=${alumno.idAlumno}"
+                                           class="btn btn-outline-danger btn-block">Eliminar</a></td>
                                 </c:when>
                                 <c:when test="${not alumno.activo}">
                                     <td>De Baja</td>
@@ -50,7 +51,8 @@
                                         <a href="ABMAlumno?modo=editar&idAlumno=${alumno.idAlumno}"
                                            class="btn btn-success btn-block"> Editar </a>
                                     </td>
-                                    <td><a href="#" class="btn btn-outline-info btn-block">Reactivar</a></td>
+                                    <td><a href="ABMAlumno?modo=cambiarEstado&idAlumno=${alumno.idAlumno}"
+                                           class="btn btn-outline-info btn-block">Reactivar</a></td>
                                 </c:when>
                             </c:choose>                            
                         </tr>

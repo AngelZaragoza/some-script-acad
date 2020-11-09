@@ -46,6 +46,10 @@ public class ABMAlumno extends HttpServlet {
                 request.setAttribute("alumno", alumnoEdit);
                 RequestDispatcher rd = request.getRequestDispatcher("/datosAlumno.jsp");
                 rd.forward(request, response);
+            } else if (modo.equals("cambiarEstado")) {
+                //Tomar parámetro idCurso, buscar en BD y cambiar estado
+                int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
+                // No llegué...
             }
         } else {
             request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
