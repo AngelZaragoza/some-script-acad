@@ -48,6 +48,8 @@ public class GestorCursos {
         
     }
     
+    //MODIFICACION DE DATOS
+    
     //Dar de Alta Curso
     //*****************
     public void agregarCurso(Curso nuevo) {
@@ -100,11 +102,14 @@ public class GestorCursos {
 
     }
     
+    //RECUPERACION DE DATOS
+
     //Listar los Cursos
     //*****************
     public ArrayList<Curso> listadoCursos() {
 
         ArrayList<Curso> lista = new ArrayList<>();
+        
         try {
 
             abrirConexion();

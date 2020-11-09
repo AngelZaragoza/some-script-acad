@@ -10,7 +10,10 @@
                         </li>
                         <li class="list-group-item">
                             <a class="btn btn-secondary btn-block" href="ListadoCursos">Listado de Cursos</a>
-                        </li>                        
+                        </li>
+                        <li class="list-group-item">
+                            <a class="btn btn-secondary btn-block" href="Reportes?categ=cursos">Reportes...</a>
+                        </li>
                     </ul>
                 </div>
             </div>

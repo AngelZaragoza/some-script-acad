@@ -8,13 +8,12 @@
     </head>
     <body>
         <%@include file="includes/menu.jsp" %>
-        <br>
+        
         <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-in">
             <div class="row justify-content-center">
                 <h3 class="">Listado de Alumnos Cargados</h3>
             </div>
-        </div>        
-        <hr>
+        </div>
         <div class="container" data-aos="fade-up">
             <table class="table table-hover">
                 <thead class="thead-light">
@@ -35,21 +34,25 @@
                             <td>${alumno.legajo}</td>
                             <td>${alumno.email}</td>
                             <td>${alumno.direccion}</td>
-                            <td>${alumno.fechaNac}</td>
-                            <td>
-                                <c:choose>
-                                    <c:when test="${alumno.activo}">Activo</c:when>
-                                    <c:when test="${not alumno.activo}">De Baja</c:when>
-                                </c:choose>
-                            </td>
-                            <td>
-                                <a href="ABMAlumno?modo=editar&idAlumno=${alumno.idAlumno}"
-                                   class="btn btn-success"> Editar </a>
-                            </td>
-                            <td>
-                                <a href="#"
-                                   class="btn btn-outline-danger">Eliminar</a>
-                            </td>                            
+                            <td>${alumno.fechaNac}</td>                            
+                            <c:choose>
+                                <c:when test="${alumno.activo}">
+                                    <td>Activo</td>
+                                    <td>
+                                        <a href="ABMAlumno?modo=editar&idAlumno=${alumno.idAlumno}"
+                                           class="btn btn-success btn-block"> Editar </a>
+                                    </td>
+                                    <td><a href="#" class="btn btn-outline-danger btn-block">Eliminar</a></td>
+                                </c:when>
+                                <c:when test="${not alumno.activo}">
+                                    <td>De Baja</td>
+                                    <td>
+                                        <a href="ABMAlumno?modo=editar&idAlumno=${alumno.idAlumno}"
+                                           class="btn btn-success btn-block"> Editar </a>
+                                    </td>
+                                    <td><a href="#" class="btn btn-outline-info btn-block">Reactivar</a></td>
+                                </c:when>
+                            </c:choose>                            
                         </tr>
                     </c:forEach>                    
                 </tbody>
