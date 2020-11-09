@@ -39,11 +39,14 @@
                             </td>                            
                             <td>
                                 <a href="ABMCurso?modo=editar&idCurso=${curso.idCurso}"
-                                   class="btn btn-success"> Editar </a>
+                                   class="btn btn-success btn-block">Editar Info</a>
+                                <br>
+                                <a href="Reportes?categ=aluCurso&idCurso=${curso.idCurso}&curso=${curso.nombre}"
+                                   class="btn btn-info btn-block">Ver Inscriptos</a>
                             </td>
                             <td>
                                 <a href="#"
-                                   class="btn btn-outline-danger">Eliminar</a>
+                                   class="btn btn-outline-danger">Eliminar Curso</a>
                             </td>
                             <td><img src="${curso.imagenUrl}" class="img-fluid"></a></td>
                         </tr>

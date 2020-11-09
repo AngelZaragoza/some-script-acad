@@ -18,17 +18,26 @@
             <div class="row justify-content-center">
                 <div class="col-sm-7">
                     <div class="card">
-                        <h4 class="card-header text-center bg-info text-white">Lista de Alumnos beneficiados con algún Descuento</h4>
+                        <h4 class="card-header text-center bg-info text-white">
+                            <c:choose>
+                                <c:when test="${not empty nombreCurso}">
+                                    ${nombreCurso}: Lista de Alumnos
+                                </c:when>
+                                <c:otherwise>
+                                    Lista de Alumnos beneficiados con algún Descuento
+                                </c:otherwise>
+                            </c:choose>
+                        </h4>
                         <div class="card-body">
                             <table class="table table-hover">
-                                <thead>
+                                <thead>                                    
                                     <th>Apellido</th>
                                     <th>Nombre</th>
                                     <th class="text-center">Legajo</th>
                                 </thead>
-                                <tbody>
-                                    <c:forEach var="lista" items="${descAlumnos}">
-                                        <tr>
+                                <tbody>                                    
+                                    <c:forEach var="lista" items="${listaAlumnos}">
+                                        <tr>                                            
                                             <td>${lista.apellido}</td>
                                             <td>${lista.nombre}</td>
                                             <td class="text-center">${lista.legajo}</td>

@@ -32,28 +32,75 @@ public class Reportes extends HttpServlet {
             throws ServletException, IOException {
         if (request.getSession().getAttribute("usr") != null) {
             String categ = request.getParameter("categ");
+            
+            
             GestorReportes gestor = new GestorReportes();
-            if (categ.equals("cursos")) {
-                //Consultar en BD y devolver datos para el reporte                
-                ArrayList<DTOFacturacionPorCurso> facturado = gestor.totalFactPorCurso();
-                float totalDescuentos = gestor.totalDescuentos();
-                
-                //Setear atributos y enviar petición
-                request.setAttribute("facturado", facturado);
-                request.setAttribute("descuentos", totalDescuentos);
-                request.setAttribute("titulo", "Reportes sobre Cursos");
-                RequestDispatcher rd = request.getRequestDispatcher("/reporteCursos.jsp");
-                rd.forward(request, response);
-            } else if (categ.equals("descuentos")) {
-                //Consultar en BD y devolver datos para el reporte
-                ArrayList<DTOAlumnosConDescuentos> descAlumnos = gestor.alumnosConDescuentos();
+            ArrayList<DTODatosBasicosAlumnos> listaAlumnos;
+            RequestDispatcher rd;
+            switch (categ) {
+                case "cursos":
+                    //Consultar en BD y devolver datos para el reporte                
+                    ArrayList<DTOFacturacionPorCurso> facturado = gestor.totalFactPorCurso();
+                    float totalDescuentos = gestor.totalDescuentos();
 
-                //Setear atributos y enviar petición
-                request.setAttribute("titulo", "Reportes sobre Descuentos");
-                request.setAttribute("descAlumnos", descAlumnos);
-                RequestDispatcher rd = request.getRequestDispatcher("/reporteDescuentos.jsp");
-                rd.forward(request, response);
+                    //Setear atributos y enviar petición
+                    request.setAttribute("facturado", facturado);
+                    request.setAttribute("descuentos", totalDescuentos);
+                    request.setAttribute("titulo", "Reportes sobre Cursos");
+                    rd = request.getRequestDispatcher("/reporteCursos.jsp");
+                    rd.forward(request, response);
+                    break;
+                
+                case "descuentos":
+                    //Consultar en BD y devolver datos para el reporte
+                    listaAlumnos = gestor.alumnosConDescuentos();
+
+                    //Setear atributos y enviar petición
+                    request.setAttribute("titulo", "Reportes sobre Descuentos");
+                    request.setAttribute("listaAlumnos", listaAlumnos);
+                    rd = request.getRequestDispatcher("/reporteAlumnos.jsp");
+                    rd.forward(request, response);
+                    break;
+                
+                case "aluCurso":
+                    //Consultar en BD y devolver datos para el reporte
+                    int idCurso = Integer.parseInt(request.getParameter("idCurso"));
+                    String nombreCurso = request.getParameter("curso");
+                    listaAlumnos = gestor.alumnosPorCurso(idCurso);
+
+                    //Setear atributos y enviar petición
+                    request.setAttribute("titulo", "Alumnos por Curso");
+                    request.setAttribute("nombreCurso", nombreCurso);
+                    request.setAttribute("listaAlumnos", listaAlumnos);
+                    rd = request.getRequestDispatcher("/reporteAlumnos.jsp");
+                    rd.forward(request, response);
+                    break;
+                    
+                default:
+                    throw new AssertionError();
             }
+            
+//            if (categ.equals("cursos")) {
+//                //Consultar en BD y devolver datos para el reporte                
+//                ArrayList<DTOFacturacionPorCurso> facturado = gestor.totalFactPorCurso();
+//                float totalDescuentos = gestor.totalDescuentos();
+//                
+//                //Setear atributos y enviar petición
+//                request.setAttribute("facturado", facturado);
+//                request.setAttribute("descuentos", totalDescuentos);
+//                request.setAttribute("titulo", "Reportes sobre Cursos");
+//                RequestDispatcher rd = request.getRequestDispatcher("/reporteCursos.jsp");
+//                rd.forward(request, response);
+//            } else if (categ.equals("descuentos")) {
+//                //Consultar en BD y devolver datos para el reporte
+//                ArrayList<DTOAlumnosConDescuentos> descAlumnos = gestor.alumnosConDescuentos();
+//
+//                //Setear atributos y enviar petición
+//                request.setAttribute("titulo", "Reportes sobre Descuentos");
+//                request.setAttribute("descAlumnos", descAlumnos);
+//                RequestDispatcher rd = request.getRequestDispatcher("/reporteDescuentos.jsp");
+//                rd.forward(request, response);
+//            }
         } else {
             request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
             RequestDispatcher rd = request.getRequestDispatcher("/Login");

@@ -4,15 +4,15 @@ package DTO;
  *
  * @author Angel
  */
-public class DTOAlumnosConDescuentos {
+public class DTODatosBasicosAlumnos {
     private String apellido;
     private String nombre;
     private String legajo;
 
-    public DTOAlumnosConDescuentos() {
+    public DTODatosBasicosAlumnos() {
     }
 
-    public DTOAlumnosConDescuentos(String apellido, String nombre, String legajo) {
+    public DTODatosBasicosAlumnos(String apellido, String nombre, String legajo) {
         this.apellido = apellido;
         this.nombre = nombre;
         this.legajo = legajo;
