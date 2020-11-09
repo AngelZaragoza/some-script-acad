@@ -42,7 +42,7 @@
                             <a class="btn btn-secondary btn-block" href="Inscripciones">Nueva Inscripción</a>
                         </li>
                         <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="#">A completar...</a>
+                            <a class="btn btn-secondary btn-block" href="Reportes?categ=descuentos">Descuentos otorgados</a>
                         </li>                        
                     </ul>
                 </div>

@@ -1,9 +1,6 @@
 package AccesoBaseDatos;
 
-
-import Modelo.*;
 import DTO.*;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
@@ -53,6 +50,8 @@ public class GestorReportes {
         }
         
     }
+    
+    // REPORTES DE CURSOS
     
     public ArrayList<DTOFacturacionPorCurso> totalFactPorCurso() {
         
@@ -107,5 +106,42 @@ public class GestorReportes {
         }
         
         return total;
+    }
+    
+    // REPORTES DE ALUMNOS
+    
+    public ArrayList<DTOAlumnosConDescuentos> alumnosConDescuentos() {
+        
+        ArrayList<DTOAlumnosConDescuentos> lista = new ArrayList<>();
+        
+        try {
+
+            abrirConexion();
+            Statement st = conn.createStatement();
+            String sql = "SELECT apellido, nombre, legajo \n" +
+                        "FROM Alumnos A JOIN Inscripciones Ic ON A.idAlumno = Ic.idAlumno\n" +
+                        "WHERE idDescuento <> 1 \n" +
+                        "GROUP BY apellido, nombre, legajo\n" +
+                        "ORDER BY apellido";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {                
+                String apellido = rs.getString("apellido");
+                String nombre = rs.getString("nombre");
+                String legajo = rs.getString("legajo");
+
+                DTOAlumnosConDescuentos alu = new DTOAlumnosConDescuentos(apellido, nombre, legajo);
+                lista.add(alu);
+            }
+
+            rs.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorReportes.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cerrarConexion();
+        }        
+        
+        return lista;
     }
 }

@@ -32,27 +32,26 @@ public class Reportes extends HttpServlet {
             throws ServletException, IOException {
         if (request.getSession().getAttribute("usr") != null) {
             String categ = request.getParameter("categ");
+            GestorReportes gestor = new GestorReportes();
             if (categ.equals("cursos")) {
-                //Consultar en BD y devolver datos para el reporte
-                GestorReportes gestor = new GestorReportes();
+                //Consultar en BD y devolver datos para el reporte                
                 ArrayList<DTOFacturacionPorCurso> facturado = gestor.totalFactPorCurso();
                 float totalDescuentos = gestor.totalDescuentos();
                 
+                //Setear atributos y enviar petición
                 request.setAttribute("facturado", facturado);
                 request.setAttribute("descuentos", totalDescuentos);
                 request.setAttribute("titulo", "Reportes sobre Cursos");
                 RequestDispatcher rd = request.getRequestDispatcher("/reporteCursos.jsp");
                 rd.forward(request, response);
-            } else if (categ.equals("editar")) {
-                //Tomar parámetro idCurso, buscar en BD y devolver objeto Curso
-                int idCurso = Integer.parseInt(request.getParameter("idCurso"));
-                GestorCursos gestor = new GestorCursos();
-                Curso cursoEdit = gestor.getCurso(idCurso);
+            } else if (categ.equals("descuentos")) {
+                //Consultar en BD y devolver datos para el reporte
+                ArrayList<DTOAlumnosConDescuentos> descAlumnos = gestor.alumnosConDescuentos();
 
                 //Setear atributos y enviar petición
-                request.setAttribute("titulo", "Editar Curso");
-                request.setAttribute("curso", cursoEdit);
-                RequestDispatcher rd = request.getRequestDispatcher("/datosCurso.jsp");
+                request.setAttribute("titulo", "Reportes sobre Descuentos");
+                request.setAttribute("descAlumnos", descAlumnos);
+                RequestDispatcher rd = request.getRequestDispatcher("/reporteDescuentos.jsp");
                 rd.forward(request, response);
             }
         } else {
