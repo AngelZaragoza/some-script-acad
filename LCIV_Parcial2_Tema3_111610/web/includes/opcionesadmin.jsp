@@ -54,10 +54,10 @@
                 <div class="card-body">                    
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="Programas">Subir un Programa</a>
+                            <a class="btn btn-secondary btn-block" href="Programas?modo=alta">Subir un Programa</a>
                         </li>
                         <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="#">---------</a>
+                            <a class="btn btn-secondary btn-block" href="Programas?modo=listadoAdmin">Listado de Programas</a>
                         </li>                        
                     </ul>
                 </div>

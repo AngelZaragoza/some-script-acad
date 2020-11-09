@@ -242,14 +242,17 @@ public class GestorBD {
 
     }
     
-    public ArrayList<Programa> listaProgramas() {
+    public ArrayList<Programa> listaProgramas(boolean descPublico) {
 
         ArrayList<Programa> lista = new ArrayList<>();
         try {
 
             abrirConexion();
             Statement st = conn.createStatement();
-            String sql = "SELECT * FROM Programas";
+            String sql = "SELECT * FROM Programas ";
+            if (descPublico){
+                sql += " WHERE permiteDescarga = 1";
+            }
             ResultSet rs = st.executeQuery(sql);
 
             while (rs.next()) {
@@ -262,6 +265,49 @@ public class GestorBD {
                 String pathDescarga = rs.getString("pathDescarga");
 
                 Programa prog = new Programa(idDPrograma, idAlumno, nombrePrograma, descripcion, permiteDescarga, cantidadDescargas, pathDescarga);
+                lista.add(prog);
+            }
+
+            rs.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cerrarConexion();
+        }
+        
+        return lista;
+        
+    }
+    
+    public ArrayList<DTOListaProgramas> infoProgramas(boolean descPublico) {
+
+        ArrayList<DTOListaProgramas> lista = new ArrayList<>();
+        try {
+
+            abrirConexion();
+            Statement st = conn.createStatement();
+            String sql = "SELECT Pr.idPrograma, Al.apellido + ' ' + Al.nombre AS nombreAutor,\n" +
+                        "        Pr.nombrePrograma, Pr.descripcion, Pr.cantidadDescargas,\n" +
+                        "        Pr.pathDescarga\n" +
+                        "    FROM LCIV_Academia_111610.dbo.Programas Pr\n" +
+                        "    JOIN LCIV_Academia_111610.dbo.Alumnos Al\n" +
+                        "        ON Pr.idAlumno = Al.idAlumno ";
+            if (descPublico){
+                sql += " WHERE permiteDescarga = 1";
+            }
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                int idPrograma = rs.getInt("idPrograma");
+                String nombreAutor = rs.getString("nombreAutor");                
+                String nombrePrograma = rs.getString("nombrePrograma");
+                String descripcion = rs.getString("descripcion");
+                //boolean permiteDescarga = rs.getBoolean("permiteDescarga");
+                int cantidadDescargas = rs.getInt("cantidadDescargas");
+                String pathDescarga = rs.getString("pathDescarga");
+
+                DTOListaProgramas prog = new DTOListaProgramas(idPrograma, nombreAutor, nombrePrograma, descripcion, cantidadDescargas, pathDescarga);
                 lista.add(prog);
             }
 

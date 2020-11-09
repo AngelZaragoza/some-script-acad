@@ -17,42 +17,27 @@
         <div class="container" data-aos="fade-up">
             <table class="table table-hover">
                 <thead class="thead-light">
-                    <th>Apellido</th>
-                    <th>Nombre</th>
-                    <th>Legajo</th>
-                    <th>Correo Electrónico</th>
-                    <th>Dirección</th>
-                    <th>Fecha Nacimiento</th>
-                    <th>Estado</th>
-                    <th colspan="2">Acciones</th>
+                    <th>ID</th>
+                    <th>Nombre del Autor</th>
+                    <th>Nombre del Programa</th>
+                    <th>Descripción del Programa</th>
+                    <th>Veces descargado</th>
+                    <th>Link Descarga:</th>
+                    <!-- <th>Estado</th>
+                    <th colspan="2">Acciones</th> -->
                 </thead>
                 <tbody>
-                    <c:forEach var="alumno" items="${lista}">
+                    <c:forEach var="prog" items="${lista}">
                         <tr>
-                            <td>${alumno.apellido}</td>
-                            <td>${alumno.nombre}</td>
-                            <td>${alumno.legajo}</td>
-                            <td>${alumno.email}</td>
-                            <td>${alumno.direccion}</td>
-                            <td>${alumno.fechaNac}</td>                            
-                            <c:choose>
-                                <c:when test="${alumno.activo}">
-                                    <td>Activo</td>
-                                    <td>
-                                        <a href="ABMAlumno?modo=editar&idAlumno=${alumno.idAlumno}"
-                                           class="btn btn-success btn-block"> Editar </a>
-                                    </td>
-                                    <td><a href="#" class="btn btn-outline-danger btn-block">Eliminar</a></td>
-                                </c:when>
-                                <c:when test="${not alumno.activo}">
-                                    <td>De Baja</td>
-                                    <td>
-                                        <a href="ABMAlumno?modo=editar&idAlumno=${alumno.idAlumno}"
-                                           class="btn btn-success btn-block"> Editar </a>
-                                    </td>
-                                    <td><a href="#" class="btn btn-outline-info btn-block">Reactivar</a></td>
-                                </c:when>
-                            </c:choose>                            
+                            <td>${prog.idPrograma}</td>
+                            <td>${prog.nombreAutor}</td>
+                            <td>${prog.nombrePrograma}</td>
+                            <td>${prog.descripcionPrograma}</td>
+                            <td>${prog.cantidadDescargas}</td>
+                            <td>
+                                <a href="Programas?modo=descargar?idPrograma=${prog.idPrograma}"
+                                    class="btn btn-success btn-block">Descargar</a>
+                            </td>                            
                         </tr>
                     </c:forEach>                    
                 </tbody>

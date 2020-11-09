@@ -10,7 +10,7 @@
                 <a class="nav-link" href="#">Cursos</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Descargas</a>
+                <a class="nav-link" href="Programas?modo=listadoPublico">Lista de Descargas</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Contacto</a>
