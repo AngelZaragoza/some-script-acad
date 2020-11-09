@@ -31,12 +31,16 @@ public class Reportes extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getSession().getAttribute("usr") != null) {
+            
+            //Codificar correctamente los caracteres enviados a la BD
+            request.setCharacterEncoding("UTF-8");
             String categ = request.getParameter("categ");
             
-            
+            //Crear Objetos a usar dependiendo del caso
             GestorReportes gestor = new GestorReportes();
             ArrayList<DTODatosBasicosAlumnos> listaAlumnos;
             RequestDispatcher rd;
+            
             switch (categ) {
                 case "cursos":
                     //Consultar en BD y devolver datos para el reporte                
@@ -78,29 +82,8 @@ public class Reportes extends HttpServlet {
                     
                 default:
                     throw new AssertionError();
-            }
-            
-//            if (categ.equals("cursos")) {
-//                //Consultar en BD y devolver datos para el reporte                
-//                ArrayList<DTOFacturacionPorCurso> facturado = gestor.totalFactPorCurso();
-//                float totalDescuentos = gestor.totalDescuentos();
-//                
-//                //Setear atributos y enviar petición
-//                request.setAttribute("facturado", facturado);
-//                request.setAttribute("descuentos", totalDescuentos);
-//                request.setAttribute("titulo", "Reportes sobre Cursos");
-//                RequestDispatcher rd = request.getRequestDispatcher("/reporteCursos.jsp");
-//                rd.forward(request, response);
-//            } else if (categ.equals("descuentos")) {
-//                //Consultar en BD y devolver datos para el reporte
-//                ArrayList<DTOAlumnosConDescuentos> descAlumnos = gestor.alumnosConDescuentos();
-//
-//                //Setear atributos y enviar petición
-//                request.setAttribute("titulo", "Reportes sobre Descuentos");
-//                request.setAttribute("descAlumnos", descAlumnos);
-//                RequestDispatcher rd = request.getRequestDispatcher("/reporteDescuentos.jsp");
-//                rd.forward(request, response);
-//            }
+            }            
+
         } else {
             request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
             RequestDispatcher rd = request.getRequestDispatcher("/Login");
@@ -120,37 +103,7 @@ public class Reportes extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        if (request.getSession().getAttribute("usr") != null) {
-            //Codificar correctamente los caracteres enviados a la BD
-            request.setCharacterEncoding("UTF-8");
-
-            //Tomar parámetros del form y crear objeto Curso
-            String nombre = request.getParameter("nombre");
-            String descripcion = request.getParameter("descripcion");
-            float costo = Float.parseFloat(request.getParameter("costo"));            
-            String imagenUrl = request.getParameter("imagenUrl");
-            boolean activo = Boolean.parseBoolean(request.getParameter("activo"));            
-            int idCurso = Integer.parseInt(request.getParameter("idCurso"));
-
-            Curso curso = new Curso(idCurso, nombre, descripcion, costo, imagenUrl, activo);
-            GestorCursos gestor = new GestorCursos();
-
-            //Chequear si viene desde la opción Alta o Editar
-            if (idCurso == 0) {
-                gestor.agregarCurso(curso);
-            } else {                
-                gestor.modificarCurso(curso);
-            }
-
-            //Redirigir al Listado por GET
-            response.sendRedirect(getServletContext().getContextPath() + "/ListadoCursos");
-        
-        } else {            
-            //Redirigir al Login por GET
-            request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
-            response.sendRedirect(getServletContext().getContextPath() + "/Login");
-            
-        }
+        //NADA POR AHORA
     }
 
     /**

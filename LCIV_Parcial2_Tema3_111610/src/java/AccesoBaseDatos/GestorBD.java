@@ -215,37 +215,67 @@ public class GestorBD {
 
     }
 
-//    
-//    //Modificar datos de un Alumno
-//    //***************************
-//    public void modificarAlumno(Alumno alumno) {
-//
-//        try {
-//            abrirConexion();            
-//            String sql = "UPDATE Alumnos SET legajo = ?, apellido = ?, nombre = ?"
-//                    + ", direccion = ?, email = ?, fechaNac = ?, activo = ? WHERE idAlumno = ?";
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setString(1, alumno.getLegajo());
-//            ps.setString(2, alumno.getApellido());
-//            ps.setString(3, alumno.getNombre());
-//            ps.setString(4, alumno.getDireccion());
-//            ps.setString(5, alumno.getEmail());
-//            ps.setString(6, alumno.getFechaNac());
-//            ps.setBoolean(7, alumno.isActivo());
-//            ps.setInt(8, alumno.getIdAlumno());
-//
-//            ps.executeUpdate();
-//            
-//
-//        } catch (Exception ex) {
-//            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);            
-//        } finally {
-//            cerrarConexion();
-//        }        
-//
-//    }
-//    
+    //Registrar subida de un Programa
+    //*******************************
+    public void subirPrograma (Programa prog) {
 
+        try {
+            abrirConexion();            
+            String sql = "INSERT INTO Programas (idAlumno, nombrePrograma, descripcion"
+                    + ", permiteDescarga, cantidadDescargas, pathDescarga) values(?,?,?,?,?,?)";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, prog.getIdAlumno());
+            ps.setString(2, prog.getNombrePrograma());
+            ps.setString(3, prog.getDescripcion());
+            ps.setBoolean(4, prog.isPermiteDescarga());
+            ps.setInt(5, prog.getCantidadDescargas());
+            ps.setString(6, prog.getPathDescarga());            
+
+            ps.executeUpdate();
+            
+
+        } catch (Exception ex) {
+            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);            
+        } finally {
+            cerrarConexion();
+        }        
+
+    }
+    
+    public ArrayList<Programa> listaProgramas() {
+
+        ArrayList<Programa> lista = new ArrayList<>();
+        try {
+
+            abrirConexion();
+            Statement st = conn.createStatement();
+            String sql = "SELECT * FROM Programas";
+            ResultSet rs = st.executeQuery(sql);
+
+            while (rs.next()) {
+                int idDPrograma = rs.getInt("idPrograma");
+                int idAlumno = rs.getInt("idAlumno");
+                String nombrePrograma = rs.getString("nombrePrograma");
+                String descripcion = rs.getString("descripcion");
+                boolean permiteDescarga = rs.getBoolean("permiteDescarga");
+                int cantidadDescargas = rs.getInt("cantidadDescargas");
+                String pathDescarga = rs.getString("pathDescarga");
+
+                Programa prog = new Programa(idDPrograma, idAlumno, nombrePrograma, descripcion, permiteDescarga, cantidadDescargas, pathDescarga);
+                lista.add(prog);
+            }
+
+            rs.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cerrarConexion();
+        }
+        
+        return lista;
+        
+    }
 //    
 //    //Recuperar Alumno con su id
 //    //*************************

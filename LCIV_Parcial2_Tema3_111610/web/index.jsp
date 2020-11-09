@@ -13,8 +13,7 @@
             <div class="row justify-content-center">
                 <h1>Bienvenido a la Academia</h1>
             </div>
-        </div>
-        <h4>${usr}</h4>
+        </div>        
         <hr>
                 
         <div class="container-fluid"  data-aos="fade-up>
