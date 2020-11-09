@@ -50,36 +50,8 @@ public class GestorBD {
         
     }
     
-//    
-//    //Modificar datos de un Alumno
-//    //***************************
-//    public void modificarAlumno(Alumno alumno) {
-//
-//        try {
-//            abrirConexion();            
-//            String sql = "UPDATE Alumnos SET legajo = ?, apellido = ?, nombre = ?"
-//                    + ", direccion = ?, email = ?, fechaNac = ?, activo = ? WHERE idAlumno = ?";
-//            PreparedStatement ps = conn.prepareStatement(sql);
-//            ps.setString(1, alumno.getLegajo());
-//            ps.setString(2, alumno.getApellido());
-//            ps.setString(3, alumno.getNombre());
-//            ps.setString(4, alumno.getDireccion());
-//            ps.setString(5, alumno.getEmail());
-//            ps.setString(6, alumno.getFechaNac());
-//            ps.setBoolean(7, alumno.isActivo());
-//            ps.setInt(8, alumno.getIdAlumno());
-//
-//            ps.executeUpdate();
-//            
-//
-//        } catch (Exception ex) {
-//            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);            
-//        } finally {
-//            cerrarConexion();
-//        }        
-//
-//    }
-//    
+    //METODOS DE CONSULTA
+    
     //Llenar Combo Alumnos
     //********************
     public ArrayList<DTOComboAlumnos> listaAlumnos() {
@@ -178,6 +150,44 @@ public class GestorBD {
         
     }
 
+    //Devolver montos para el cálculo en la Inscripción
+    //*************************************************
+    public DTOMontosInscripcion montosInscripcion(int idCurso, int idDescuento) {
+        
+        DTOMontosInscripcion resultado = null;
+        
+        try {
+
+            abrirConexion();
+            String sql = "SELECT costo, porcentDescuento FROM Cursos, Descuentos "
+                    + "WHERE idCurso = ? AND idDescuento = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setInt(1, idCurso);
+            ps.setInt(2, idDescuento);
+            
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                float costoCurso = rs.getFloat("costo");                
+                int porcentDescuento = rs.getInt("porcentDescuento");
+                
+                resultado = new DTOMontosInscripcion(costoCurso, porcentDescuento);
+
+            }
+
+            rs.close();
+
+        } catch (SQLException ex) {
+            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            cerrarConexion();
+        }
+        
+        return resultado;
+        
+    }
+    
+    
     //Dar de Alta Inscripción
     //************************
     public void agregarInscripcion (Inscripcion nueva) {
@@ -204,6 +214,37 @@ public class GestorBD {
         }        
 
     }
+
+//    
+//    //Modificar datos de un Alumno
+//    //***************************
+//    public void modificarAlumno(Alumno alumno) {
+//
+//        try {
+//            abrirConexion();            
+//            String sql = "UPDATE Alumnos SET legajo = ?, apellido = ?, nombre = ?"
+//                    + ", direccion = ?, email = ?, fechaNac = ?, activo = ? WHERE idAlumno = ?";
+//            PreparedStatement ps = conn.prepareStatement(sql);
+//            ps.setString(1, alumno.getLegajo());
+//            ps.setString(2, alumno.getApellido());
+//            ps.setString(3, alumno.getNombre());
+//            ps.setString(4, alumno.getDireccion());
+//            ps.setString(5, alumno.getEmail());
+//            ps.setString(6, alumno.getFechaNac());
+//            ps.setBoolean(7, alumno.isActivo());
+//            ps.setInt(8, alumno.getIdAlumno());
+//
+//            ps.executeUpdate();
+//            
+//
+//        } catch (Exception ex) {
+//            Logger.getLogger(GestorBD.class.getName()).log(Level.SEVERE, null, ex);            
+//        } finally {
+//            cerrarConexion();
+//        }        
+//
+//    }
+//    
 
 //    
 //    //Recuperar Alumno con su id

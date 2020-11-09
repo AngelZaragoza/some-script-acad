@@ -2,6 +2,7 @@ package Servlets;
 
 import Modelo.VMCombosInscripcion;
 import AccesoBaseDatos.*;
+import DTO.DTOMontosInscripcion;
 import Modelo.Inscripcion;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -67,19 +68,19 @@ public class Inscripciones extends HttpServlet {
             //Codificar correctamente los caracteres enviados a la BD
             request.setCharacterEncoding("UTF-8");
             
-            //Tomar parámetros del form y crear objeto Inscripcion
+            //Tomar parámetros del form y tomar montos de la BD
             int idCurso = Integer.parseInt(request.getParameter("idCurso"));
             int idAlumno = Integer.parseInt(request.getParameter("idAlumno"));
             int idDescuento = Integer.parseInt(request.getParameter("idDescuento"));            
             String fechaInscripcion = request.getParameter("fechaInscripcion");            
             
-            
-            float montoDescuento = Float.parseFloat(request.getParameter("montoDescuento"));
-            float montoAbonado = Float.parseFloat(request.getParameter("montoAbonado"));
-            
-            Inscripcion insc = new Inscripcion(0, idAlumno, idCurso, idDescuento, fechaInscripcion, montoDescuento, montoAbonado);
             GestorBD gestor = new GestorBD();
+            DTOMontosInscripcion montos = gestor.montosInscripcion(idCurso, idDescuento);
+            float montoDescuento = (montos.getCostoCurso() * montos.getPorcentDescuento())/100;
+            float montoAbonado = (montos.getCostoCurso() - montoDescuento);
             
+            //Crear objeto Inscripcion y agregar a la BD
+            Inscripcion insc = new Inscripcion(0, idAlumno, idCurso, idDescuento, fechaInscripcion, montoDescuento, montoAbonado);            
             gestor.agregarInscripcion(insc);
             response.sendRedirect(getServletContext().getContextPath() + "/MenuAdmin");
             
