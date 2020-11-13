@@ -8,12 +8,13 @@
     </head>
     <body>
         <%@include file="includes/menu.jsp" %>
-        
-        <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-in">
+        <br>
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-in">
             <div class="row justify-content-center">
                 <h3 class="">Listado de Alumnos Cargados</h3>
             </div>
         </div>
+        <hr>
         <div class="container" data-aos="fade-up">
             <table class="table table-hover">
                 <thead class="thead-light">
@@ -24,9 +25,9 @@
                     <th>Dirección</th>
                     <th>Fecha Nacimiento</th>
                     <th>Estado</th>
-                    <th colspan="2">Acciones</th>
+                    <th colspan="2" class="text-center">Acciones</th>
                 </thead>
-                <tbody>
+                <tbody class="fondo-semitransp">
                     <c:forEach var="alumno" items="${lista}">
                         <tr>
                             <td>${alumno.apellido}</td>

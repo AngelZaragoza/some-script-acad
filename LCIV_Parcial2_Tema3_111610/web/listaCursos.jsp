@@ -9,23 +9,23 @@
     <body>
         <%@include file="includes/menu.jsp" %>
         <br>
-        <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-in">
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-in">
             <div class="row justify-content-center">
-                <h3 class="">Listado de Cursos Cargados</h3>
+                <h3 class="text-center">Listado de Cursos Cargados</h3>
             </div>
         </div>        
         <hr>
         <div class="container" data-aos="fade-up">
-            <table class="table table-hover">
+            <table class="table table-responsive table-hover">
                 <thead class="thead-light">
                     <th>Nombre</th>
                     <th>Descripción</th>
                     <th>Costo</th>
                     <th>Estado</th>                    
-                    <th colspan="2">Acciones</th>
-                    <th>Imagen</th>
+                    <th colspan="2" class="text-center">Acciones</th>
+                    <th class="text-center">Imagen</th>
                 </thead>
-                <tbody>
+                <tbody class="fondo-semitransp">
                     <c:forEach var="curso" items="${lista}">
                         <tr>
                             <td>${curso.nombre}</td>

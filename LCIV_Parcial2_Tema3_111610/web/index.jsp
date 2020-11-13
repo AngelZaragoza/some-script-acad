@@ -9,7 +9,7 @@
     <body>
         <%@include file="includes/menu.jsp" %>
         <br>
-        <div class="container" data-aos="fade-left">
+        <div class="container fondo-semitransp" data-aos="fade-left">
             <div class="row justify-content-center">
                 <h1>Bienvenido a la Academia SomeScript</h1>
             </div>

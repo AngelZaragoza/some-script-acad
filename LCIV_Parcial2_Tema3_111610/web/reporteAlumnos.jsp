@@ -8,17 +8,20 @@
     </head>
     <body>
         <%@include file="includes/menu.jsp" %>
+        
         <br>
-        <div class="container" data-aos="fade-left">
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-left">
             <div class="row justify-content-center">
                 <h3>${titulo}</h3>
             </div>
         </div>
-        <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-up">
+        <hr>
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-up">
             <div class="row justify-content-center">
                 <div class="col-sm-7">
                     <div class="card">
                         <h4 class="card-header text-center bg-info text-white">
+                            <%-- Muestra un título u otro dependiendo desde viene la petición --%>
                             <c:choose>
                                 <c:when test="${not empty nombreCurso}">
                                     ${nombreCurso}: Lista de Alumnos
@@ -28,14 +31,14 @@
                                 </c:otherwise>
                             </c:choose>
                         </h4>
-                        <div class="card-body">
+                        <div class="card-body fondo-semitransp">
                             <table class="table table-hover">
                                 <thead>                                    
                                     <th>Apellido</th>
                                     <th>Nombre</th>
                                     <th class="text-center">Legajo</th>
                                 </thead>
-                                <tbody>                                    
+                                <tbody class="fondo-semitransp">                                    
                                     <c:forEach var="lista" items="${listaAlumnos}">
                                         <tr>                                            
                                             <td>${lista.apellido}</td>

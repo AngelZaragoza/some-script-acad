@@ -1,5 +1,5 @@
         <hr>
-        <footer class="container-fluid text-center" data-aos="fade-up">
+        <footer class="container-fluid text-center" data-aos="fade-down" data-aos-anchor-placement="bottom-bottom">
             <p>Angel Gabriel Zaragoza - Leg 111610 - 2020</p>                
         </footer>        
         <br>

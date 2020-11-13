@@ -9,7 +9,7 @@
     <body>
         <%@include file="includes/menu.jsp" %>
         <br>
-        <div class="container" data-aos="fade-left">
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-left">
             <div class="row justify-content-center">
                 <h1>Bienvenido ${usr} </h1>
             </div>

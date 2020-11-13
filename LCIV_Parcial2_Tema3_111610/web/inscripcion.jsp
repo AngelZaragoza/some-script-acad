@@ -8,7 +8,8 @@
     <body onload="saludo();">
         <%@include file="includes/menu.jsp" %>
         <jsp:useBean id="combos" class="Modelo.VMCombosInscripcion" scope="request"></jsp:useBean>
-        <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-in">
+        <br>
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-in">
             <div class="row justify-content-center text-center">
                 <div class="col col-lg-6">
                     <h3>${titulo}</h3>
@@ -18,7 +19,7 @@
                 
         <div class="container" data-aos="fade-up">
             <div class="row justify-content-center">
-                <div class="col col-lg-6 shadow p-3 mb-5 bg-white rounded">
+                <div class="col col-lg-6 shadow p-3 mb-5 fondo-semitransp rounded">
                     <form id="inscripciones" method="post" action="Inscripciones">
                         <!-- <input type="hidden" name="idInscripcion" value="${alumno.idAlumno}"/> -->
                         <div class="form-group">                            
