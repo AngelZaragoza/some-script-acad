@@ -125,18 +125,29 @@ public class GestorCursos {
     }
     
     //RECUPERACION DE DATOS
-
-    //Listar los Cursos
-    //*****************
-    public ArrayList<Curso> listadoCursos() {
-
+    
+    //Listar todos los Cursos (Admin) o sólo los Activos (Invitados)
+    //************************************************************
+    public ArrayList<Curso> listarCursos(boolean invitado) {
+        
+        
         ArrayList<Curso> lista = new ArrayList<>();
         
         try {
 
             abrirConexion();
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM Cursos");
+            /*
+            Parámetro invitado = "true" (1):
+            - SELECT devuelve SÓLO los registros cuyo campo "activo" sea 1.
+            Parámetro invitado = "false" (0):
+            - SELECT devuelve TODOS los registros (dado que 1 <> 0)
+            */
+            
+            String sql = "SELECT * FROM Cursos WHERE 1 <> ? OR activo = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setBoolean(1, invitado);
+            ps.setBoolean(2, invitado);            
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 int idCurso = rs.getInt("idCurso");

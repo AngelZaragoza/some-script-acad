@@ -9,7 +9,7 @@
                             <a class="btn btn-secondary btn-block" href="ABMCurso?modo=alta">Alta de Curso</a>
                         </li>
                         <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="ListadoCursos">Listado de Cursos</a>
+                            <a class="btn btn-secondary btn-block" href="ListadoCursos?modo=listadoAdmin">Listado de Cursos</a>
                         </li>
                         <li class="list-group-item">
                             <a class="btn btn-secondary btn-block" href="Reportes?categ=cursos">Reportes...</a>

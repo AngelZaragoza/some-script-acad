@@ -31,17 +31,34 @@ public class ListadoCursos extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        if (request.getSession().getAttribute("usr") != null) {
-            GestorCursos gestor = new GestorCursos();
-            ArrayList<Curso> lista = gestor.listadoCursos();
+        
+        //Declarar variables y objetos a utilizar
+        String modo = request.getParameter("modo");
+        ArrayList<Curso> lista;
+        GestorCursos gestor = new GestorCursos();
+        
+        //Chequear si la solicitud viene de un invitado o de un admin
+        if (modo.equals("listadoAdmin")) {        
+            if (request.getSession().getAttribute("usr") != null) {                
+                
+                //El parámetro "false" indica que la petición NO es de un Invitado
+                lista = gestor.listarCursos(false);
+                request.setAttribute("lista", lista);
+                request.setAttribute("titulo", "Listado de Cursos");
+                RequestDispatcher rd = request.getRequestDispatcher("/listaCursos.jsp");
+                rd.forward(request, response);
+            } else {
+                request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
+                RequestDispatcher rd = request.getRequestDispatcher("/Login");
+                rd.forward(request, response);
+            }
+        } else if (modo.equals("listadoPublico")) {
             
+            //El parámetro "true" indica que la petición ES de un Invitado
+            lista = gestor.listarCursos(true);
             request.setAttribute("lista", lista);
-            request.setAttribute("titulo", "Listado de Cursos");
-            RequestDispatcher rd = request.getRequestDispatcher("/listaCursos.jsp");
-            rd.forward(request, response);
-        } else {
-            request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
-            RequestDispatcher rd = request.getRequestDispatcher("/Login");
+            request.setAttribute("titulo", "Cursos Disponibles");
+            RequestDispatcher rd = request.getRequestDispatcher("/invitadoCursos.jsp");
             rd.forward(request, response);
         }
     }

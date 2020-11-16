@@ -7,7 +7,7 @@
     <div class="collapse navbar-collapse" id="navbarNavDropdown">        
         <ul class="navbar-nav m-auto">            
             <li class="nav-item">
-                <a class="nav-link" href="#">Cursos</a>
+                <a class="nav-link" href="ListadoCursos?modo=listadoPublico">Cursos</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Programas?modo=listadoPublico">Lista de Descargas</a>
