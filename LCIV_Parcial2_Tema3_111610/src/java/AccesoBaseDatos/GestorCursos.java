@@ -130,7 +130,6 @@ public class GestorCursos {
     //************************************************************
     public ArrayList<Curso> listarCursos(boolean invitado) {
         
-        
         ArrayList<Curso> lista = new ArrayList<>();
         
         try {

@@ -41,7 +41,7 @@ public class ListadoCursos extends HttpServlet {
         if (modo.equals("listadoAdmin")) {        
             if (request.getSession().getAttribute("usr") != null) {                
                 
-                //El parámetro "false" indica que la petición NO es de un Invitado
+                //El parámetro "false" indica que la petición *NO* es de un Invitado
                 lista = gestor.listarCursos(false);
                 request.setAttribute("lista", lista);
                 request.setAttribute("titulo", "Listado de Cursos");
@@ -54,7 +54,7 @@ public class ListadoCursos extends HttpServlet {
             }
         } else if (modo.equals("listadoPublico")) {
             
-            //El parámetro "true" indica que la petición ES de un Invitado
+            //El parámetro "true" indica que la petición *ES* de un Invitado
             lista = gestor.listarCursos(true);
             request.setAttribute("lista", lista);
             request.setAttribute("titulo", "Cursos Disponibles");

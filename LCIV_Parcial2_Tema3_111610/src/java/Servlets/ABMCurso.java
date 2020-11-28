@@ -29,15 +29,18 @@ public class ABMCurso extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         if (request.getSession().getAttribute("usr") != null) {
+            
             String modo = request.getParameter("modo");
+            GestorCursos gestor = new GestorCursos();
+            
             if (modo.equals("alta")) {
                 request.setAttribute("titulo", "Alta de Curso");
                 RequestDispatcher rd = request.getRequestDispatcher("/datosCurso.jsp");
                 rd.forward(request, response);
             } else if (modo.equals("editar")) {
+                
                 //Tomar parámetro idCurso, buscar en BD y devolver objeto Curso
-                int idCurso = Integer.parseInt(request.getParameter("idCurso"));
-                GestorCursos gestor = new GestorCursos();
+                int idCurso = Integer.parseInt(request.getParameter("idCurso"));                
                 Curso cursoEdit = gestor.getCurso(idCurso);
 
                 //Setear atributos y enviar petición
@@ -46,9 +49,15 @@ public class ABMCurso extends HttpServlet {
                 RequestDispatcher rd = request.getRequestDispatcher("/datosCurso.jsp");
                 rd.forward(request, response);
             } else if (modo.equals("cambiarEstado")) {
+                
                 //Tomar parámetro idCurso, buscar en BD y cambiar estado
                 int idCurso = Integer.parseInt(request.getParameter("idCurso"));
                 // No llegué...
+                Curso cursoEstado = gestor.getCurso(idCurso);
+                request.setAttribute("titulo", "Estado de Curso");
+                request.setAttribute("curso", cursoEstado);
+                RequestDispatcher rd = request.getRequestDispatcher("/confirmaCurso.jsp");
+                rd.forward(request, response);
             }
         } else {
             request.getSession().setAttribute("mensajeError", "Error. Sesión no iniciada");
@@ -72,27 +81,35 @@ public class ABMCurso extends HttpServlet {
         if (request.getSession().getAttribute("usr") != null) {
             //Codificar correctamente los caracteres enviados a la BD
             request.setCharacterEncoding("UTF-8");
-
-            //Tomar parámetros del form y crear objeto Curso
-            String nombre = request.getParameter("nombre");
-            String descripcion = request.getParameter("descripcion");
-            float costo = Float.parseFloat(request.getParameter("costo"));            
-            String imagenUrl = request.getParameter("imagenUrl");
-            boolean activo = Boolean.parseBoolean(request.getParameter("activo"));            
-            int idCurso = Integer.parseInt(request.getParameter("idCurso"));
-
-            Curso curso = new Curso(idCurso, nombre, descripcion, costo, imagenUrl, activo);
             GestorCursos gestor = new GestorCursos();
 
-            //Chequear si viene desde la opción Alta o Editar
-            if (idCurso == 0) {
-                gestor.agregarCurso(curso);
-            } else {                
-                gestor.modificarCurso(curso);
-            }
+            if(request.getParameter("cambiarEstado") != null) {
+                //Tomar sólo los parámetros que se usarán
+                int idCurso = Integer.parseInt(request.getParameter("idCurso"));
+                boolean activo = Boolean.parseBoolean(request.getParameter("activo"));
+                
+                //Invertir el estado del parámetro "activo" para eliminar o reactivar curso 
+                gestor.cambiarEstadoCurso(idCurso, !activo);
+            } else {
+                //Tomar parámetros del form y crear objeto Curso
+                String nombre = request.getParameter("nombre");
+                String descripcion = request.getParameter("descripcion");
+                float costo = Float.parseFloat(request.getParameter("costo"));            
+                String imagenUrl = request.getParameter("imagenUrl");
+                boolean activo = Boolean.parseBoolean(request.getParameter("activo"));            
+                int idCurso = Integer.parseInt(request.getParameter("idCurso"));
 
+                Curso curso = new Curso(idCurso, nombre, descripcion, costo, imagenUrl, activo);                
+
+                //Chequear si viene desde la opción Alta o Editar y llamar al método correspondiente
+                if (idCurso == 0) {
+                    gestor.agregarCurso(curso);
+                } else {                
+                    gestor.modificarCurso(curso);
+                }
+            }
             //Redirigir al Listado por GET
-            response.sendRedirect(getServletContext().getContextPath() + "/ListadoCursos");
+            response.sendRedirect(getServletContext().getContextPath() + "/ListadoCursos?modo=listadoAdmin");
         
         } else {            
             //Redirigir al Login por GET

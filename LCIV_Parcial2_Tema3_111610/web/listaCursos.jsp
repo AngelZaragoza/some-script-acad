@@ -45,8 +45,16 @@
                                    class="btn btn-info btn-block">Ver Inscriptos</a>
                             </td>
                             <td>
-                                <a href="#"
-                                   class="btn btn-outline-danger">Eliminar Curso</a>
+                                <c:choose>
+                                    <c:when test="${curso.activo}">
+                                        <a href="ABMCurso?modo=cambiarEstado&idCurso=${curso.idCurso}"
+                                                class="btn btn-outline-danger">Eliminar Curso</a>
+                                    </c:when>
+                                    <c:when test="${not curso.activo}">
+                                        <a href="ABMCurso?modo=cambiarEstado&idCurso=${curso.idCurso}"
+                                                class="btn btn-outline-info">Reactivar Curso</a>
+                                    </c:when>
+                                </c:choose>                                
                             </td>
                             <td><img src="${curso.imagenUrl}" class="img-fluid"></a></td>
                         </tr>
