@@ -13,4 +13,19 @@
             30
         </session-timeout>
     </session-config>
+    <env-entry> 
+        <env-entry-name>conn-string</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>jdbc:sqlserver://ANGEL-PC:50876;databaseName=LCIV_Academia_111610</env-entry-value> 
+    </env-entry>
+    <env-entry> 
+        <env-entry-name>conn-user</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>sa</env-entry-value> 
+    </env-entry>
+    <env-entry> 
+        <env-entry-name>conn-pass</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>tekken5</env-entry-value> 
+    </env-entry>
 </web-app>

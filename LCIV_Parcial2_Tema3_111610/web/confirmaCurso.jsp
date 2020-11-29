@@ -12,7 +12,7 @@
         <c:set var="accion" value="Eliminar" scope="request"></c:set>
         <c:if test="${not curso.activo}">
             <c:set var="accion" value="Reactivar" scope="request"></c:set>
-        </c:if>
+        </c:if>               
         <br>
         <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-in">
             <div class="row justify-content-center">
