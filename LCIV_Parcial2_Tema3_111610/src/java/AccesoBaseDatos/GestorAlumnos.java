@@ -5,19 +5,27 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.InitialContext;
 
 public class GestorAlumnos {
 
-    private String CONN = "jdbc:sqlserver://ANGEL-PC:50876;databaseName=LCIV_Academia_111610";
-    private String USER = "sa";
-    private String PASS = "tekken5";
+    private String CONN;
+    private String USER;
+    private String PASS;
     private Connection conn;
+    private InitialContext contexto; //Para leer claves del archivo web.xml    
 
     public GestorAlumnos() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestorAlumnos.class.getName()).log(Level.SEVERE, null, ex);
+            
+            //Recuperar claves del archivo de configuración web.xml
+            contexto = new InitialContext();
+            CONN = (String) contexto.lookup("java:comp/env/conn-string");
+            USER = (String) contexto.lookup("java:comp/env/conn-user");
+            PASS = (String) contexto.lookup("java:comp/env/conn-pass");
+        } catch (Exception ex) {
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);           
         }
     }
     

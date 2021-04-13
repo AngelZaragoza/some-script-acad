@@ -8,7 +8,7 @@
     </head>
     <body onload="saludo();">
         <%@include file="includes/menu.jsp" %>
-        <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-in">
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded " data-aos="fade-in">            
             <div class="row justify-content-center text-center">
                 <div class="col col-lg-6">
                     <h2 id="saludo"></h2>
@@ -17,11 +17,11 @@
                         <h4> ${mensajeError} </h4>
                     </c:if>                    
                 </div>
-            </div>
+            </div>            
         </div>
         <div class="container" data-aos="fade-up">
             <div class="row justify-content-center">
-                <div class="col col-lg-6 shadow p-3 mb-5 bg-white rounded">
+                <div class="col col-lg-6 shadow p-3 mb-5 fondo-semitransp rounded">
                     <form id="login" method="post" action="Login">
                         <div class="form-group">
                             <label for="user" class="col-form-label">Usuario:</label>                
@@ -38,8 +38,11 @@
                                    placeholder="Password"/>
                             <div class="validate"></div>
                         </div>                
-                        <div class="col-sm-6">                            
-                            <input type="submit" class="btn btn-primary btn-block" value="Verificar">                            
+                        
+                        <div class="form-group row">
+                            <div class="col-sm-6 offset-sm-6">
+                                <input type="submit" class="btn btn-primary btn-block" value="Verificar">                            
+                            </div>
                         </div>
                     </form>
                 </div>

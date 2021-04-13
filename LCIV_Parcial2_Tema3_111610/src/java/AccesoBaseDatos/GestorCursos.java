@@ -5,19 +5,27 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.naming.InitialContext;
 
 public class GestorCursos {
 
-    private String CONN = "jdbc:sqlserver://ANGEL-PC:50876;databaseName=LCIV_Academia_111610";
-    private String USER = "sa";
-    private String PASS = "tekken5";
+    private String CONN;
+    private String USER;
+    private String PASS;
     private Connection conn;
+    private InitialContext contexto; //Para leer claves del archivo web.xml    
 
     public GestorCursos() {
         try {
             Class.forName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);
+            
+            //Recuperar claves del archivo de configuración web.xml
+            contexto = new InitialContext();
+            CONN = (String) contexto.lookup("java:comp/env/conn-string");
+            USER = (String) contexto.lookup("java:comp/env/conn-user");
+            PASS = (String) contexto.lookup("java:comp/env/conn-pass");
+        } catch (Exception ex) {
+            Logger.getLogger(GestorCursos.class.getName()).log(Level.SEVERE, null, ex);           
         }
     }
     
@@ -125,18 +133,28 @@ public class GestorCursos {
     }
     
     //RECUPERACION DE DATOS
-
-    //Listar los Cursos
-    //*****************
-    public ArrayList<Curso> listadoCursos() {
-
+    
+    //Listar todos los Cursos (Admin) o sólo los Activos (Invitados)
+    //************************************************************
+    public ArrayList<Curso> listarCursos(boolean invitado) {
+        
         ArrayList<Curso> lista = new ArrayList<>();
         
         try {
 
             abrirConexion();
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM Cursos");
+            /*
+            Parámetro invitado = "true" (1):
+            - SELECT devuelve SÓLO los registros cuyo campo "activo" sea 1.
+            Parámetro invitado = "false" (0):
+            - SELECT devuelve TODOS los registros (dado que 1 <> 0)
+            */
+            
+            String sql = "SELECT * FROM Cursos WHERE 1 <> ? OR activo = ?";
+            PreparedStatement ps = conn.prepareStatement(sql);
+            ps.setBoolean(1, invitado);
+            ps.setBoolean(2, invitado);            
+            ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
                 int idCurso = rs.getInt("idCurso");

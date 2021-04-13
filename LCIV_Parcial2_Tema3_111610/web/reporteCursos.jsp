@@ -9,17 +9,18 @@
     <body>
         <%@include file="includes/menu.jsp" %>
         <br>
-        <div class="container" data-aos="fade-left">
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-left">
             <div class="row justify-content-center">
                 <h3>${titulo}</h3>
             </div>
         </div>
-        <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-up">
+        <hr>
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-up">
             <div class="row justify-content-center">
                 <div class="col-sm-7">
                     <div class="card">
                         <h4 class="card-header text-center bg-info text-white">Total Facturado por cada Curso</h4>
-                        <div class="card-body">
+                        <div class="card-body fondo-semitransp">
                             <table class="table table-hover">
                                 <thead>
                                     <th>Nombre del Curso</th>
@@ -40,7 +41,7 @@
                 <div class="col-sm-5">
                     <div class="card">
                         <h4 class="card-header text-center bg-info text-white">Descuentos Realizados</h4>
-                        <div class="card-body">                    
+                        <div class="card-body fondo-semitransp">                    
                             <ul class="list-group list-group-flush">
                                 <li class="list-group-item text-center">
                                     Total de Descuentos Otorgados:<br>

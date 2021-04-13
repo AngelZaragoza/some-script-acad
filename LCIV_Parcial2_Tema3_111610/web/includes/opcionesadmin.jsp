@@ -1,7 +1,7 @@
 <div class="container" data-aos="fade-up">
     <div class="row justify-content-center">
         <div class="col-sm-3">
-            <div class="card">
+            <div class="card fondo-semitransp">
                 <h2 class="card-header text-center bg-info text-white">Gestión de Cursos</h2>
                 <div class="card-body">                    
                     <ul class="list-group list-group-flush">
@@ -9,7 +9,7 @@
                             <a class="btn btn-secondary btn-block" href="ABMCurso?modo=alta">Alta de Curso</a>
                         </li>
                         <li class="list-group-item">
-                            <a class="btn btn-secondary btn-block" href="ListadoCursos">Listado de Cursos</a>
+                            <a class="btn btn-secondary btn-block" href="ListadoCursos?modo=listadoAdmin">Listado de Cursos</a>
                         </li>
                         <li class="list-group-item">
                             <a class="btn btn-secondary btn-block" href="Reportes?categ=cursos">Reportes...</a>
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="card">
+            <div class="card fondo-semitransp">
                 <h2 class="card-header text-center bg-info text-white">Gestión de Alumnos</h2>
                 <div class="card-body">                    
                     <ul class="list-group list-group-flush">
@@ -34,7 +34,7 @@
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="card">
+            <div class="card fondo-semitransp">
                 <h2 class="card-header text-center bg-info text-white">Gestión de Inscripciones</h2>
                 <div class="card-body">                    
                     <ul class="list-group list-group-flush">
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="col-sm-3">
-            <div class="card">
+            <div class="card fondo-semitransp">
                 <h2 class="card-header text-center bg-info text-white">Gestión de Programas</h2>
                 <div class="card-body">                    
                     <ul class="list-group list-group-flush">

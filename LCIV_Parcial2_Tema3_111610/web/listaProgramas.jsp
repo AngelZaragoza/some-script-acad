@@ -9,13 +9,16 @@
     <body>
         <%@include file="includes/menu.jsp" %>
         
-        <div class="container shadow-sm p-3 mb-5 bg-white rounded" data-aos="fade-in">
+        <br>
+        <div class="container shadow-sm p-3 mb-5 fondo-semitransp rounded" data-aos="fade-in">
             <div class="row justify-content-center">
-                <h3 class="">Listado de Programas subidos por Alumnos</h3>
+                <h3 class="text-center">Listado de Programas subidos por Alumnos</h3>
             </div>
         </div>
+        <hr>
+        
         <div class="container" data-aos="fade-up">
-            <table class="table table-hover">
+            <table class="table table-responsive table-hover">
                 <thead class="thead-light">
                     <th>ID</th>
                     <th>Nombre del Autor</th>
@@ -26,7 +29,7 @@
                     <!-- <th>Estado</th>
                     <th colspan="2">Acciones</th> -->
                 </thead>
-                <tbody>
+                <tbody class="fondo-semitransp">
                     <c:forEach var="prog" items="${lista}">
                         <tr>
                             <td>${prog.idPrograma}</td>

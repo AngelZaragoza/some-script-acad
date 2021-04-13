@@ -1,5 +1,14 @@
 body {
   background-color: #ffdd90;
-  background-image: url("446714_fondo.jpg");
+  background: url("446714_fondo.jpg") no-repeat center center fixed;
+	        -webkit-background-size: cover;
+	        -moz-background-size: cover;
+	        -o-background-size: cover;
+	        background-size: cover;  
+  min-height: 100vh;
+}
+
+.fondo-semitransp {
+    background-color: rgba(255, 221, 144, 0.3) !important;
 }
 
